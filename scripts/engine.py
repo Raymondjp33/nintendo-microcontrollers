@@ -160,7 +160,7 @@ def match_px_exact(px: Point, c: Color) -> Matcher:
 @functools.lru_cache
 def _tessapi() -> tesserocr.PyTessBaseAPI:
     return tesserocr.PyTessBaseAPI(
-        tessdata.data_path(),
+        '/opt/homebrew/share/tessdata',
         'eng',
         psm=tesserocr.PSM.SINGLE_LINE,
     )
@@ -169,7 +169,7 @@ def _tessapi() -> tesserocr.PyTessBaseAPI:
 @functools.lru_cache
 def tessapi_int() -> tesserocr.PyTessBaseAPI:
     api = tesserocr.PyTessBaseAPI(
-        tessdata.data_path(),
+        '/opt/homebrew/share/tessdata',
         'eng',
         psm=tesserocr.PSM.SINGLE_LINE,
     )

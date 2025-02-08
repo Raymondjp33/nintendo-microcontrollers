@@ -5,10 +5,10 @@ import argparse
 import cv2
 import numpy
 
-from scripts.engine import Color
-from scripts.engine import get_text
-from scripts.engine import make_vid
-from scripts.engine import Point
+from engine import Color
+from engine import get_text
+from engine import make_vid
+from engine import Point
 
 
 def main() -> int:
