@@ -1,5 +1,5 @@
-AVRDIR = /usr/share/arduino/hardware/arduino/avr
-VARIANT = micro
+AVRDIR = /Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/ArduinoCore-avr
+VARIANT = leonardo
 
 # ---
 
