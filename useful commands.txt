@@ -1,0 +1,2 @@
+To find ported devices (Find Arduino/TTL)
+ls /dev/tty.*

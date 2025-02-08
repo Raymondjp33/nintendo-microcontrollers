@@ -26,7 +26,7 @@ from scripts.engine import run
 from scripts.engine import States
 from scripts.engine import Wait
 
-SERIAL_DEFAULT = 'COM1' if sys.platform == 'win32' else '/dev/ttyUSB0'
+SERIAL_DEFAULT = '/dev/tty.usbserial-BG009FDF'
 
 reset = do(Press('H'), Wait(1), Press('X'), Wait(.5), Press('A'), Wait(3))
 
