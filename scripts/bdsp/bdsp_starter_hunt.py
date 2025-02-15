@@ -85,12 +85,13 @@ def _shh(ser: serial.Serial) -> Generator[None]:
     finally:
         ser.write(b'.')    
 
-def increment_counter(file_path="counter.txt"):
-    path = Path(file_path)
+def increment_counter(frame: numpy.ndarray, delay: float, file_path="counter.txt", ):
+    counter_path = Path(file_path)
+    log_path = Path("log.txt")
     
     # Read the existing count (default to 0 if file does not exist)
-    if path.exists():
-        with path.open("r") as file:
+    if counter_path.exists():
+        with counter_path.open("r") as file:
             try:
                 count = int(file.read().strip())
             except ValueError:
@@ -101,11 +102,16 @@ def increment_counter(file_path="counter.txt"):
     # Increment the counter
     count += 1
 
+    timestamp  = time.strftime('%Y-%m-%d %H:%M:%S')
+    log_data = f'Count: {count} - Delay: {delay} - Timestamp {timestamp}'
+
     # Write the updated count back to the file
-    with path.open("w") as file:
-        file.write(str(count))
+    with counter_path.open("w") as file1, log_path.open("a") as file2:
+        file1.write(str(count))
+        file2.write(log_data + '\n')
     
-    return count
+    cv2.imwrite(f"/Volumes/Untitled/poke screenshots/{count}.png", frame)
+    
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -181,10 +187,13 @@ def main() -> int:
             _await_pixel(ser, vid, x=35, y=630, pixel=(250, 250, 250), exact_pixel=False)
 
             t1 = time.time()
-            print(f'dialog delay: {t1 - t0:.3f}s')
+            delay = t1 - t0
+            print(f'dialog delay: {delay:.3f}s')
+            frame = _getframe(vid)
 
-            if (t1 - t0) > 1:
+            if (delay) > 0.7:
                 print('SHINY!!!')
+                _press(ser, 'C', duration=2)
                 _press(ser, 'H', duration=1)
                 _press(ser, 's', duration=0.25)
                 _press(ser, 'd', duration=0.25)
@@ -196,10 +205,10 @@ def main() -> int:
                 _press(ser, 'A', duration=1)
                 _press(ser, 'w', duration=1)
                 _press(ser, 'A', duration=1)
-                increment_counter()
+                increment_counter(frame=frame, delay=delay)
                 return 0
 
-            increment_counter()
+            increment_counter(frame=frame, delay=delay)
     
 
 
