@@ -1,2 +1,5 @@
 To find ported devices (Find Arduino/TTL)
 ls /dev/tty.*
+
+Repo with shiny sprites
+https://github.com/adamsb0303/Shiny_Hunt_Tracker/blob/master/Images/Sprites/3d/480.gif

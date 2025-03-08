@@ -188,30 +188,40 @@ def increment_counter(frame: numpy.ndarray, delay: float, file_path="counter.txt
     cv2.imwrite(f"/Volumes/Untitled/poke screenshots/{count}.png", frame)
 
 def get_mespirit_on_route(ser: serial.Serial, vid: cv2.VideoCapture,):
+         
+        # for _ in range(7):
+        #     frame = _getframe(vid)
+        #     print(frame[117][1038])
+        #     time.sleep(0.15)
+        # return 
+    
         in_route = False
         while True: 
+
+
             if (not in_route):
                 _press(ser, 'd', duration=0.35)
                 in_route = True
             
             if (in_route):
-                for _ in range(5):
+                for _ in range(6):
                     frame = _getframe(vid)
-                    if (_color_near(frame[120][1041], (31, 97, 36))):
+                    if (_color_near(frame[117][1038], (31, 63, 28))):
                         double_check = double_check_mes_on_route(vid)
                         if (double_check):
-                            # print('It is here!')
-                            return 0
+                            print('It is here!')
+                            
+                            return       
                     # print('Not here!')
-                    time.sleep(0.15)
+                    time.sleep(0.10)
                 _press(ser, 'a')
                 in_route = False
 
 
 def double_check_mes_on_route(vid: cv2.VideoCapture,):
-        for _ in range(5):
+        for _ in range(6):
             frame = _getframe(vid)
-            if (_color_near(frame[120][1041], (31, 97, 36))):
+            if (_color_near(frame[117][1038], (31, 63, 28))):
                 # print('It is here!')
                 return True
             # print('Not here!')
@@ -341,8 +351,9 @@ def get_to_route(ser: serial.Serial):
     _press(ser, 'a', duration=1)
     _press(ser, 'w', duration=1)
     _press(ser, 'd', duration=4)
-    _press(ser, 's', duration=1)
+    _press(ser, 's', duration=1.05)
     _press(ser, 'd', duration=3.65)
+    _press(ser, 'w', duration=0.5)
     _press(ser, 'R')
 
 def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
@@ -371,12 +382,13 @@ def connect_and_go_to_game(ser: serial.Serial):
 
 def go_to_change_grip(ser: serial.Serial):
     _press(ser, 'H')
-    time.sleep(0.5)
+    time.sleep(1)
     _press(ser, 's')
     _press(ser, 'd', count=4)
     _press(ser, 'A')
     time.sleep(1)
     _press(ser, 'A')
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -401,7 +413,7 @@ def main() -> int:
         # print(encounter_mespirit(ser=ser, vid=vid))
         # get_back_to_route(ser, vid)
         # return 0
-
+    
         mes_is_shiny = False
         skip_prep = False
         while not mes_is_shiny:

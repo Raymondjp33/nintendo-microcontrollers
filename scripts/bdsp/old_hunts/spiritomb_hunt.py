@@ -115,7 +115,7 @@ def increment_counter(frame: numpy.ndarray, delay: float, file_path="spiritomb-c
     cv2.imwrite(f"/Volumes/Untitled/poke screenshots/spiritomb - {count}.png", frame)
     
 def connect_and_go_to_game(ser: serial.Serial):
-    _press(ser, 'H')
+    _press(ser, 'H', sleep_time=1)
     _press(ser, 'H', duration=0.1)
     _press(ser, 'A', duration=0.5)
     _press(ser, 'H', duration=0.1)
@@ -125,7 +125,7 @@ def connect_and_go_to_game(ser: serial.Serial):
 
 def go_to_change_grip(ser: serial.Serial):
     _press(ser, 'H')
-    time.sleep(0.5)
+    time.sleep(1)
     _press(ser, 's')
     _press(ser, 'd', count=4)
     _press(ser, 'A')
@@ -145,8 +145,8 @@ def main() -> int:
   
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
         # go_to_change_grip(ser)
-        connect_and_go_to_game(ser)
-        return 0
+        # connect_and_go_to_game(ser)
+        # return 0
         while True:
             start_time = time.time()
             _press(ser, 'H')
