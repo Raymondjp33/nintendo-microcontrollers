@@ -2,4 +2,6 @@ turtwig - 6440 (May have missed around 2000)
 dialga - 1478
 mesprit - 2042
 spiritomb - 3078
-cranidos - 43
+cranidos - 43 / 5137
+registeel - 2834
+regice - 

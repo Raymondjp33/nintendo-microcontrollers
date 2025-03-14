@@ -159,7 +159,7 @@ def _shh(ser: serial.Serial) -> Generator[None]:
     finally:
         ser.write(b'.')    
 
-def increment_counter(frame: numpy.ndarray, file_path="fossil-counter.txt", ):
+def increment_counter(frame: numpy.ndarray,current_color, file_path="fossil-counter.txt", ):
     counter_path = Path(file_path)
     log_path = Path("fossil-log.txt")
     
@@ -177,12 +177,14 @@ def increment_counter(frame: numpy.ndarray, file_path="fossil-counter.txt", ):
     count += 1
 
     timestamp  = time.strftime('%Y-%m-%d %H:%M:%S')
-    # log_data = f'{star}Count: {count} - Delay: {delay} - Timestamp {timestamp}'
+    star = '*' if current_color[0] < 222 or current_color[0] > 231 or current_color[1] < 175 or current_color[1] > 182 or current_color[2] < 114 or current_color[2] > 121 else ''
+    log_data = f'{star}Count: {count} - Current Color: {current_color} - Timestamp {timestamp}'
+
 
     # Write the updated count back to the file
     with counter_path.open("w") as file1, log_path.open("a") as file2:
         file1.write(str(count))
-        # file2.write(log_data + '\n')
+        file2.write(log_data + '\n')
     
     cv2.imwrite(f"/Volumes/Untitled/poke screenshots/{count}.png", frame)
 
@@ -263,7 +265,7 @@ def main() -> int:
     parser.add_argument('--serial', default='/dev/tty.usbserial-BG009FDF')
     args = parser.parse_args()
 
-    vid = cv2.VideoCapture(0)
+    vid = cv2.VideoCapture(1)
     vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     vid.set(cv2.CAP_PROP_BUFFERSIZE, 1)
@@ -288,11 +290,12 @@ def main() -> int:
                 get_pokemon(ser=ser)
                 time.sleep(3)
                 frame = _getframe(vid)
-                if (not _color_near(frame[info.point.y][info.point.x], info.base_color)):
+                current_color = frame[info.point.y][info.point.x]
+                if (not _color_near(current_color, info.base_color)):
                     print('Shiny!!!')
                     return 0
                 print(f'Not Shiny')
-                increment_counter(frame=frame)
+                increment_counter(frame=frame, current_color=current_color)
                 _press(ser, 'A', sleep_time=2)
             t1 = time.time()
             print(f'Run took {t1-t0:.3f}s')

@@ -86,7 +86,7 @@ def _shh(ser: serial.Serial) -> Generator[None]:
     finally:
         ser.write(b'.')    
 
-def increment_counter(frame: numpy.ndarray, delay: float, file_prefix, ):
+def increment_counter(delay: float, file_prefix, frame=None):
     counter_path = Path(f'{file_prefix}-counter.txt')
     log_path = Path(f"{file_prefix}-log.txt")
     
@@ -112,8 +112,15 @@ def increment_counter(frame: numpy.ndarray, delay: float, file_prefix, ):
         file1.write(str(count))
         file2.write(log_data + '\n')
     
-    cv2.imwrite(f"/Volumes/Untitled/poke screenshots/{file_prefix} - {count}.png", frame)
-    
+    if frame is not None:
+        cv2.imwrite(f"/Volumes/Untitled/poke screenshots/{file_prefix} - {count}.png", frame)
+  
+def write_shiny_text():
+    shiny_text_path = Path(f"shiny_text.txt")
+    with shiny_text_path.open("w") as file1:
+        file1.write('I got the shiny! My switch\nwill be off until I am\nback. Make sure to come\nback when/after I catch it!')
+
+
 def connect_and_go_to_game(ser: serial.Serial):
     _press(ser, 'H', sleep_time=1)
     _press(ser, 'H', duration=0.1)
@@ -131,6 +138,22 @@ def go_to_change_grip(ser: serial.Serial):
     _press(ser, 'A')
     time.sleep(1)
     _press(ser, 'A')
+    
+def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
+    _press(ser, 'H')
+    time.sleep(1)
+    _press(ser, 'X')
+    time.sleep(1)
+    _press(ser, 'A')
+
+    frame = _getframe(vid)
+    while not _color_near(frame[50][90], (250, 250, 250)):
+        _press(ser, 'A')
+        _wait_and_render(vid, .15)
+        frame = _getframe(vid)
+
+    print('game loaded!')
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -143,7 +166,11 @@ def main() -> int:
     vid.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
     # currently_hunting = 'Azelf'
-    currently_hunting = 'Uxie'
+    # currently_hunting = 'Uxie'
+    currently_hunting = 'Regice'
+
+    x_val = 960
+    y_val = 660
 
   
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
@@ -152,50 +179,31 @@ def main() -> int:
         # return 0
         while True:
             start_time = time.time()
-            _press(ser, 'H')
-            _wait_and_render(vid, 1)
-            _press(ser, 'X')
-            _wait_and_render(vid, 1)
-            _press(ser, 'A')
+            reset_game(ser=ser, vid=vid)
 
-
-            frame = _getframe(vid)
-            while not _color_near(frame[50][90], (250, 250, 250)):
-                _press(ser, 'A')
-                _wait_and_render(vid, .15)
-                frame = _getframe(vid)
-
-            print('game loaded!')
-
+            print('Interacting')
+            _press(ser, 'A', sleep_time=1.5)
             _press(ser, 'A', sleep_time=0.5)
-
-            x_val = 960
-            y_val = 660
-
-            _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            print('Interacting!') 
             _press(ser, 'A')
-            _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255),exact_pixel=False)
-            print('Interacting white gone')
-            
+            # test_start = time.time()
+
             
             _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
             # print('First white screen')
             _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
             # print('Gone first white screen')
 
-            _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # print('Second white screen')
-            _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # print('Gone Second white screen')
-            
-            time.sleep(2.5)
-
+            # _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
+            # # print('Second white screen')
+            # _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
+            # # print('Gone Second white screen')
+            # time.sleep(7)
+            # test_end = time.time()
             _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
             print(f'{currently_hunting} appeared!')
-            log_frame = _getframe(vid)
 
             _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
+            log_frame = _getframe(vid)
             print(f'{currently_hunting} pixel gone') 
             t0 = time.time()
             
@@ -203,12 +211,10 @@ def main() -> int:
             print('Go Breloom!')
             t1 = time.time()
 
-            t1 = time.time()
             delay = t1 - t0
             print(f'dialog delay: {delay:.3f}s')
-            frame = _getframe(vid)
 
-            if (delay) > 0.6:
+            if (delay) > 0.7:
                 print('SHINY!!!')
                 _press(ser, 'C', duration=2)
                 _press(ser, 'H', duration=1)
@@ -223,13 +229,14 @@ def main() -> int:
                 _press(ser, 'w', duration=1)
                 _press(ser, 'A', duration=1)
                 increment_counter(frame=log_frame, delay=delay, file_prefix=currently_hunting)
+                write_shiny_text()
                 return 0
 
-            increment_counter(frame=log_frame, delay=delay, file_prefix=currently_hunting)
+            increment_counter(delay=delay, file_prefix=currently_hunting)
             end_time = time.time()
             print(f'Total runtime: {(end_time-start_time):.3f}s')
-            return 0
-    
+            # print(f'Test runtime: {(test_end-test_start):.3f}s')
+            # return 0
 
 
     vid.release()
