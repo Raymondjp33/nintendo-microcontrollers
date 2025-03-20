@@ -14,6 +14,7 @@ from engine import Point
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--image')
+    parser.add_argument('--screenshot')
     args = parser.parse_args()
 
     if args.image:
@@ -60,6 +61,11 @@ def main() -> int:
 
     cv2.namedWindow('game2')
     cv2.setMouseCallback('game2', cb)
+
+    if args.screenshot:
+        frame = getframe()
+        cv2.imwrite("screenshot.png", frame)  # Save as PNG
+        print("Screenshot saved!")
 
     while True:
         frame = getframe()
