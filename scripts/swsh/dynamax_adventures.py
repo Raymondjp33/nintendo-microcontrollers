@@ -109,6 +109,7 @@ def _shh(ser: serial.Serial) -> Generator[None]:
 @functools.lru_cache
 def _tessapi() -> tesserocr.PyTessBaseAPI:
     return tesserocr.PyTessBaseAPI(
+        #/opt/homebrew/Cellar/tesseract/5.5.0/share/
         '/opt/homebrew/share/tessdata',
         'eng',
         psm=tesserocr.PSM.SINGLE_LINE,
@@ -166,7 +167,7 @@ def match_text(
         return text == get_text(frame, top_left, bottom_right, invert=invert)
     return match_text_impl
 
-def increment_counter(file_prefix, frame=None):
+def increment_counter(file_prefix, frames=None):
     counter_path = Path(f'{file_prefix}-counter.txt')
     # log_path = Path(f"{file_prefix}-log.txt")
     
@@ -192,8 +193,9 @@ def increment_counter(file_prefix, frame=None):
         file1.write(str(count))
         # file2.write(log_data + '\n')
     
-    if frame is not None:
-        cv2.imwrite(f"/Volumes/Untitled/dynamax/{file_prefix} - {count}.png", frame)
+    if frames is not None:
+        for x in range(frames.__len__()):
+            cv2.imwrite(f"/Volumes/Untitled/dynamax/{file_prefix} - {count} - {x}.png", frames[x])
   
 def write_shiny_text():
     shiny_text_path = Path(f"shiny_text.txt")
@@ -336,14 +338,14 @@ def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial):
     _press(ser, 'A', sleep_time=4)
     
     frame = _getframe(vid)
+    log_frames = []
     current_name = get_text(frame=frame, top_left=Point(y=87, x=279), bottom_right=Point(y=127, x=595), invert=True)
     log_frame = None
     while not any(value[0] == current_name for value in name_map.values()):
         pokemon_is_shiny = check_if_shiny(vid)
         print(f'Checking pokemon {index}, name: {current_name}, is shiny: {pokemon_is_shiny}')
         name_map[index] = (current_name, pokemon_is_shiny)
-        if index == 3:
-            log_frame = frame
+        log_frames.append(frame)
         index += 1
         _press(ser, 's')
         time.sleep(3)
@@ -359,8 +361,7 @@ def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial):
         print(f'Shiny legendary at index: {last_key}')
         return True
     
-    if contains_legendary:
-        increment_counter('TapuBulu', frame=log_frame)
+    increment_counter('TapuKoko', frames=log_frames)
 
     first_true_key = next((key for key, (_, flag) in name_map.items() if flag), None)
 
@@ -385,11 +386,15 @@ def swap_if_needed(vid: cv2.VideoCapture, ser: serial.Serial):
     _press(ser, '+', sleep_time=1.5)
     frame = _getframe(vid)
 
-    curr_attack = int(get_text(frame=frame, top_left=Point(y=211, x=969), bottom_right=Point(y=247, x=1056), invert=True))
-    curr_specattack = int(get_text(frame=frame, top_left=Point(y=178, x=1192), bottom_right=Point(y=210, x=1249), invert=True))
+    try: curr_attack = int(get_text(frame=frame, top_left=Point(y=211, x=969), bottom_right=Point(y=247, x=1056), invert=True))
+    except: curr_attack = 0
+    try: curr_specattack = int(get_text(frame=frame, top_left=Point(y=178, x=1192), bottom_right=Point(y=210, x=1249), invert=True))
+    except: curr_specattack = 0
 
-    temp_attack = int(get_text(frame=frame, top_left=Point(y=401, x=971), bottom_right=Point(y=432, x=1049), invert=True))
-    temp_specattack = int(get_text(frame=frame, top_left=Point(y=362, x=1195), bottom_right=Point(y=394, x=1249), invert=True))
+    try: temp_attack = int(get_text(frame=frame, top_left=Point(y=401, x=971), bottom_right=Point(y=432, x=1049), invert=True))
+    except: temp_attack = 0
+    try: temp_specattack = int(get_text(frame=frame, top_left=Point(y=362, x=1195), bottom_right=Point(y=394, x=1249), invert=True))
+    except: temp_specattack = 0
 
     curr_max = max(curr_attack, curr_specattack)
     temp_max = max(temp_attack, temp_specattack)
@@ -411,14 +416,20 @@ def select_starter(vid: cv2.VideoCapture, ser: serial.Serial):
     print('Selecting starter!')
     _press(ser, '+', sleep_time=1.5)
     frame = _getframe(vid)
-    first_attack = int(get_text(frame=frame, top_left=Point(y=175, x=971), bottom_right=Point(y=207, x=1041), invert=True))
-    first_specattack = int(get_text(frame=frame, top_left=Point(y=138, x=1191), bottom_right=Point(y=171, x=1250), invert=True))
+    try: first_attack = int(get_text(frame=frame, top_left=Point(y=175, x=971), bottom_right=Point(y=207, x=1041), invert=True))
+    except: first_attack = 0
+    try: first_specattack = int(get_text(frame=frame, top_left=Point(y=138, x=1191), bottom_right=Point(y=171, x=1250), invert=True))
+    except: first_specattack = 0
 
-    second_attack = int(get_text(frame=frame, top_left=Point(y=361, x=971), bottom_right=Point(y=394, x=1043), invert=True))
-    second_specattack = int(get_text(frame=frame, top_left=Point(y=323, x=1190), bottom_right=Point(y=356, x=1250), invert=True))
+    try: second_attack = int(get_text(frame=frame, top_left=Point(y=361, x=971), bottom_right=Point(y=394, x=1043), invert=True))
+    except: second_attack = 0
+    try: second_specattack = int(get_text(frame=frame, top_left=Point(y=323, x=1190), bottom_right=Point(y=356, x=1250), invert=True))
+    except: second_specattack = 0
 
-    third_attack = int(get_text(frame=frame, top_left=Point(y=547, x=969), bottom_right=Point(y=582, x=1050), invert=True))
-    third_specattack = int(get_text(frame=frame, top_left=Point(y=508, x=1193), bottom_right=Point(y=543, x=1250), invert=True))
+    try: third_attack = int(get_text(frame=frame, top_left=Point(y=547, x=969), bottom_right=Point(y=582, x=1050), invert=True))
+    except: third_attack = 0
+    try: third_specattack = int(get_text(frame=frame, top_left=Point(y=508, x=1193), bottom_right=Point(y=543, x=1250), invert=True))
+    except: third_specattack = 0
 
     first_largest = (max(first_attack, first_specattack), 0)
     second_largest = (max(second_attack, second_specattack), 0)
@@ -490,7 +501,7 @@ def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial):
 
     # Would you like to embark on a Dynamax Adventure?
     _press(ser, 'A', sleep_time=2, count=4)
-    # _press(ser, 's', sleep_time=0.5)
+    _press(ser, 's', sleep_time=0.5, count=2)
     _press(ser, 'A', sleep_time=2, count=3)
     time.sleep(4)
 
@@ -549,7 +560,7 @@ def main() -> int:
                     break
 
                 restart_dungeon(vid, ser)
-                return 0
+                # return 0
 
             if (screen == 'Cheer On'):
                 print('Cheering')
