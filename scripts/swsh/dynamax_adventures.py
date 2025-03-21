@@ -328,7 +328,7 @@ def dynamax_if_available(vid: cv2.VideoCapture, ser: serial.Serial):
     else:
         print('Not dynamaxing!')
 
-def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial):
+def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial, end_run = False):
     print("Choosing")
     index = 0
     name_map = {}
@@ -356,14 +356,18 @@ def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial):
     print(f'Legendary: {contains_legendary}')
     print(f'We have processed all pokemon: {name_map}')
     _press(ser, 'B', sleep_time=4)
+    increment_counter('Zapdos', frames=log_frames)
     last_key, last_value = next(reversed(name_map.items()))
     if (contains_legendary and last_value[1]):
         print(f'Shiny legendary at index: {last_key}')
         return True
     
-    increment_counter('TapuKoko', frames=log_frames)
+   
 
     first_true_key = next((key for key, (_, flag) in name_map.items() if flag), None)
+
+    if (end_run):
+        return True
 
     if (first_true_key is None):
         print('Not taking any pokemon')
@@ -554,7 +558,7 @@ def main() -> int:
             if (screen == 'Choosing'):
                 fight_index = 0
                 selected = False
-                shiny_legend = handle_choose_pokemon(vid, ser)
+                shiny_legend = handle_choose_pokemon(vid, ser, end_run=True)
 
                 if (shiny_legend):
                     break
