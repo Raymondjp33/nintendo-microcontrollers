@@ -7,4 +7,6 @@ registeel - 2834
 regice - 7602
 cresselia - 
 Tapu Bulu - 54 Raids
-Tapu Koko - 
+Tapu Koko - 52 Raids
+Zapdos - 
+Virizion - 2331
