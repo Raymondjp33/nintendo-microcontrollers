@@ -11,10 +11,82 @@ import cv2
 import numpy
 import serial
 
+import tesserocr
+from typing import Protocol
+import functools
+
 class Color(NamedTuple):
     b: int
     g: int
     r: int
+
+class Point(NamedTuple):
+    y: int
+    x: int
+
+    def norm(self, dims: tuple[int, int, int]) -> Point:
+        return type(self)(
+            int(self.y / NORM.y * dims[0]),
+            int(self.x / NORM.x * dims[1]),
+        )
+
+    def denorm(self, dims: tuple[int, int, int]) -> Point:
+        return type(self)(
+            int(self.y / dims[0] * NORM.y),
+            int(self.x / dims[1] * NORM.x),
+        )
+
+NORM = Point(y=720, x=1280)
+
+@functools.lru_cache
+def _tessapi() -> tesserocr.PyTessBaseAPI:
+    return tesserocr.PyTessBaseAPI(
+        #/opt/homebrew/Cellar/tesseract/5.5.0/share/
+        '/opt/homebrew/share/tessdata',
+        'eng',
+        psm=tesserocr.PSM.SINGLE_LINE,
+    )
+
+class Matcher(Protocol):
+    def __call__(self, frame: numpy.ndarray) -> bool: ...
+
+def tess_text_u8(
+        img: numpy.ndarray,
+        *,
+        tessapi: tesserocr.PyTessBaseAPI | None = None,
+) -> str:
+    tessapi = tessapi or _tessapi()
+
+    tessapi.SetImageBytes(
+        img.tobytes(),
+        width=img.shape[1],
+        height=img.shape[0],
+        bytes_per_pixel=1,
+        bytes_per_line=img.shape[1],
+    )
+    return tessapi.GetUTF8Text().strip()
+
+def get_text(
+        frame: numpy.ndarray,
+        top_left: Point,
+        bottom_right: Point,
+        *,
+        invert: bool,
+        tessapi: tesserocr.PyTessBaseAPI | None = None,
+) -> str:
+    tl_norm = top_left.norm(frame.shape)
+    br_norm = bottom_right.norm(frame.shape)
+
+    crop = frame[tl_norm.y:br_norm.y, tl_norm.x:br_norm.x]
+    crop = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
+    _, crop = cv2.threshold(
+        crop, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU,
+    )
+    if invert:
+        crop = cv2.bitwise_not(crop)
+
+    return tess_text_u8(crop, tessapi=tessapi)
+
 
 def _press(ser: serial.Serial, s: str, duration: float = .1, count: int = 1, sleep_time = .075) -> None:
     for _ in range(count):
@@ -175,10 +247,21 @@ def main() -> int:
             start_time = time.time()
             # Open camp
             _press(ser, 'X', sleep_time=1.5)
-            _press(ser, 'A', sleep_time=8)
+            _press(ser, 'A')
+            
+            current_text = None
+
+            while current_text != 'Zoom In':
+                time.sleep(1)
+                frame = _getframe(vid)
+                current_text = get_text(frame=frame, top_left=Point(691, 1190), bottom_right=Point(713, 1270), invert=True)
+            
+            time.sleep(1)
 
             _press(ser, 'B', sleep_time=1)
-            _press(ser, 'A')
+            _press(ser, 'A', sleep_time=1)
+
+            time.sleep(1)
 
             
             _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(58, 58, 58))
