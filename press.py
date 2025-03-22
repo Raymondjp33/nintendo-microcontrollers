@@ -10,13 +10,15 @@ from scripts.switch import SERIAL_DEFAULT
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--serial', default=SERIAL_DEFAULT)
+    # parser.add_argument('--serial', default=SERIAL_DEFAULT)
+    parser.add_argument('--serial', default='/dev/tty.usbserial-120')
     parser.add_argument('--duration', type=float, default=.1)
     parser.add_argument('--count', type=int, default=1)
     parser.add_argument('key')
     args = parser.parse_args()
 
     with serial.Serial(args.serial, 9600) as ser:
+        time.sleep(1)
         for _ in range(args.count):
             ser.write(args.key.encode())
             time.sleep(args.duration)
