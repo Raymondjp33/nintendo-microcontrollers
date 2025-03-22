@@ -1,0 +1,1363 @@
+[
+  {
+    "name": "Ivysaur",
+    "types": ["grass", "poison"],
+    "ability": "Chlorophyll",
+    "moves": ["Grass Pledge", "Synthesis", "Solar Beam", "Sludge Bomb"]
+  },
+  {
+    "name": "Charmeleon",
+    "types": ["fire"],
+    "ability": "Solar Power",
+    "moves": ["Fire Pledge", "Dragon Pulse", "Endure", "Inferno"]
+  },
+  {
+    "name": "Wartortle",
+    "types": ["water"],
+    "ability": "Rain Dish",
+    "moves": ["Water Pledge", "Ice Beam", "Aura Sphere", "Hydro Pump"]
+  },
+  {
+    "name": "Butterfree",
+    "types": ["bug", "flying"],
+    "ability": "Tinted Lens",
+    "moves": ["Pollen Puff", "Venoshock", "Rage Powder", "Giga Drain"]
+  },
+  {
+    "name": "Raichu",
+    "types": ["electric"],
+    "ability": "Lightning Rod",
+    "moves": ["Rising Voltage", "Speed Swap", "Light Screen", "Focus Blast"]
+  },
+  {
+    "name": "Raichu",
+    "types": ["electric", "psychic"],
+    "ability": "Surge Surfer",
+    "moves": ["Thunderbolt", "Electric Terrain", "Psychic", "Round"]
+  },
+  {
+    "name": "Sandslash",
+    "types": ["ground"],
+    "ability": "Sand Veil",
+    "moves": ["Crush Claw", "Stomping Tantrum", "Stone Edge", "Leech Life"]
+  },
+  {
+    "name": "Sandslash",
+    "types": ["ice", "steel"],
+    "ability": "Snow Cloak",
+    "moves": ["Avalanche", "Rock Slide", "Brick Break", "Swords Dance"]
+  },
+  {
+    "name": "Nidoqueen",
+    "types": ["poison", "ground"],
+    "ability": "Poison Point",
+    "moves": ["Scorching Sands", "Venoshock", "Charm", "Shadow Ball"]
+  },
+  {
+    "name": "Nidoking",
+    "types": ["poison", "ground"],
+    "ability": "Rivalry",
+    "moves": ["High Horsepower", "Fire Punch", "Ice Punch", "Thunder Punch"]
+  },
+  {
+    "name": "Clefairy",
+    "types": ["fairy"],
+    "ability": "Friend Guard",
+    "moves": ["Life Dew", "Mystical Fire", "Magical Leaf", "Reflect"]
+  },
+  {
+    "name": "Clefable",
+    "types": ["fairy"],
+    "ability": "Magic Guard",
+    "moves": ["Meteor Beam", "Dazzling Gleam", "Follow Me", "Cosmic Power"]
+  },
+  {
+    "name": "Jigglypuff",
+    "types": ["normal", "fairy"],
+    "ability": "Friend Guard",
+    "moves": ["Substitute", "Light Screen", "Fake Tears", "Draining Kiss"]
+  },
+  {
+    "name": "Wigglytuff",
+    "types": ["normal", "fairy"],
+    "ability": "Competitive",
+    "moves": ["Dazzling Gleam", "Round", "Expanding Force", "Sweet Kiss"]
+  },
+  {
+    "name": "Gloom",
+    "types": ["grass", "poison"],
+    "ability": "Chlorophyll",
+    "moves": ["Venoshock", "Toxic", "Moonblast", "Stun Spore"]
+  },
+  {
+    "name": "Vileplume",
+    "types": ["grass", "poison"],
+    "ability": "Chlorophyll",
+    "moves": ["Giga Drain", "Grassy Terrain", "Toxic", "Pollen Puff"]
+  },
+  {
+    "name": "Dugtrio",
+    "types": ["ground"],
+    "ability": "Sand Force",
+    "moves": ["High Horsepower", "Substitute", "Mud-slap", "Rock Slide"]
+  },
+  {
+    "name": "Dugtrio",
+    "types": ["ground", "steel"],
+    "ability": "Sand Veil",
+    "moves": ["Iron Head", "High Horsepower", "Sucker Punch", "Screech"]
+  },
+  {
+    "name": "Persian",
+    "types": ["normal"],
+    "ability": "Technician",
+    "moves": ["Facade", "Play Rough", "Feint", "Round"]
+  },
+  {
+    "name": "Persian",
+    "types": ["dark"],
+    "ability": "Fur Coat",
+    "moves": ["Assurance", "Snarl", "Feint", "Quash"]
+  },
+  {
+    "name": "Golduck",
+    "types": ["water"],
+    "ability": "Swift Swim",
+    "moves": ["Aqua Jet", "Screech", "Mega Kick", "Brine"]
+  },
+  {
+    "name": "Poliwrath",
+    "types": ["water", "fighting"],
+    "ability": "Water Absorb",
+    "moves": ["Drain Punch", "Body Slam", "Coaching", "Liquidation"]
+  },
+  {
+    "name": "Kadabra",
+    "types": ["psychic"],
+    "ability": "Magic Guard",
+    "moves": ["Psyshock", "Round", "Endure", "Dazzling Gleam"]
+  },
+  {
+    "name": "Machoke",
+    "types": ["fighting"],
+    "ability": "No Guard",
+    "moves": ["Dynamic Punch", "Rock Tomb", "Payback", "Coaching"]
+  },
+  {
+    "name": "Tentacruel",
+    "types": ["water", "poison"],
+    "ability": "Clear Body",
+    "moves": ["Water Pulse", "Hydro Pump", "Poison Jab", "Swords Dance"]
+  },
+  {
+    "name": "Slowbro",
+    "types": ["water", "psychic"],
+    "ability": "Own Tempo",
+    "moves": ["Expanding Force", "Psych Up", "Flamethrower", "Psyshock"]
+  },
+  {
+    "name": "Magneton",
+    "types": ["electric", "steel"],
+    "ability": "Analytic",
+    "moves": ["Electro Ball", "Flash Cannon", "Magnet Rise", "Light Screen"]
+  },
+  {
+    "name": "Haunter",
+    "types": ["ghost", "poison"],
+    "ability": "Levitate",
+    "moves": ["Hex", "Hypnosis", "Dream Eater", "Energy Ball"]
+  },
+  {
+    "name": "Kingler",
+    "types": ["water"],
+    "ability": "Hyper Cutter",
+    "moves": ["Crabhammer", "Wide Guard", "Dig", "Superpower"]
+  },
+  {
+    "name": "Exeggutor",
+    "types": ["grass", "psychic"],
+    "ability": "Harvest",
+    "moves": ["Psycho Cut", "Solar Beam", "Stomping Tantrum", "Terrain Pulse"]
+  },
+  {
+    "name": "Marowak",
+    "types": ["ground"],
+    "ability": "Battle Armor",
+    "moves": ["Bonemerang", "Throat Chop", "Iron Head", "Screech"]
+  },
+  {
+    "name": "Marowak",
+    "types": ["fire", "ghost"],
+    "ability": "Rock Head",
+    "moves": ["Flare Blitz", "Shadow Bone", "Will-o-wisp", "Iron Head"]
+  },
+  {
+    "name": "Hitmonlee",
+    "types": ["fighting"],
+    "ability": "Limber",
+    "moves": ["Close Combat", "Wide Guard", "Blaze Kick", "Low Sweep"]
+  },
+  {
+    "name": "Hitmonchan",
+    "types": ["fighting"],
+    "ability": "Iron Fist",
+    "moves": ["Power-up Punch", "Fire Punch", "Thunder Punch", "Ice Punch"]
+  },
+  {
+    "name": "Lickitung",
+    "types": ["normal"],
+    "ability": "Oblivious",
+    "moves": ["Round", "Blizzard", "Thunder", "Muddy Water"]
+  },
+  {
+    "name": "Weezing",
+    "types": ["poison"],
+    "ability": "Neutralizing Gas",
+    "moves": ["Clear Smog", "Heat Wave", "Sludge Bomb", "Dark Pulse"]
+  },
+  {
+    "name": "Weezing",
+    "types": ["poison", "fairy"],
+    "ability": "Misty Surge",
+    "moves": ["Strange Steam", "Clear Smog", "Flamethrower", "Taunt"]
+  },
+  {
+    "name": "Rhydon",
+    "types": ["ground", "rock"],
+    "ability": "Rock Head",
+    "moves": ["Drill Run", "Smack Down", "Smart Strike", "Scary Face"]
+  },
+  {
+    "name": "Chansey",
+    "types": ["normal"],
+    "ability": "Healer",
+    "moves": ["Round", "Heal Pulse", "Helping Hand", "Light Screen"]
+  },
+  {
+    "name": "Tangela",
+    "types": ["grass"],
+    "ability": "Leaf Guard",
+    "moves": ["Power Whip", "Stun Spore", "Grassy Glide", "Body Slam"]
+  },
+  {
+    "name": "Kangaskhan",
+    "types": ["normal"],
+    "ability": "Early Bird",
+    "moves": ["Body Slam", "Sucker Punch", "Dig", "Outrage"]
+  },
+  {
+    "name": "Seadra",
+    "types": ["water"],
+    "ability": "Sniper",
+    "moves": ["Scald", "Dragon Pulse", "Substitute", "Round"]
+  },
+  {
+    "name": "Seaking",
+    "types": ["water"],
+    "ability": "Water Veil",
+    "moves": ["Waterfall", "Bounce", "Poison Jab", "Drill Run"]
+  },
+  {
+    "name": "Starmie",
+    "types": ["water", "psychic"],
+    "ability": "Analytic",
+    "moves": ["Power Gem", "Dazzling Gleam", "Psycho Cut", "Icy Wind"]
+  },
+  {
+    "name": "Mr. Mime",
+    "types": ["psychic", "fairy"],
+    "ability": "Filter",
+    "moves": ["Light Screen", "Reflect", "Helping Hand", "Psychic"]
+  },
+  {
+    "name": "Mr. Mime",
+    "types": ["ice", "psychic"],
+    "ability": "Ice Body",
+    "moves": ["Light Screen", "Reflect", "Icy Wind", "Psychic"]
+  },
+  {
+    "name": "Scyther",
+    "types": ["bug", "flying"],
+    "ability": "Technician",
+    "moves": ["Fury Cutter", "Quick Attack", "Assurance", "Wing Attack"]
+  },
+  {
+    "name": "Jynx",
+    "types": ["ice", "psychic"],
+    "ability": "Dry Skin",
+    "moves": ["Draining Kiss", "Lovely Kiss", "Ice Beam", "Round"]
+  },
+  {
+    "name": "Electabuzz",
+    "types": ["electric"],
+    "ability": "Vital Spirit",
+    "moves": ["Rising Voltage", "Electroweb", "Helping Hand", "Round"]
+  },
+  {
+    "name": "Magmar",
+    "types": ["fire"],
+    "ability": "Vital Spirit",
+    "moves": ["Fire Blast", "Burning Jealousy", "Clear Smog", "Round"]
+  },
+  {
+    "name": "Tauros",
+    "types": ["normal"],
+    "ability": "Anger Point",
+    "moves": ["Facade", "High Horsepower", "Close Combat", "Assurance"]
+  },
+  {
+    "name": "Ditto",
+    "types": ["normal"],
+    "ability": "Imposter",
+    "moves": ["Transform"]
+  },
+  {
+    "name": "Vaporeon",
+    "types": ["water"],
+    "ability": "Water Absorb",
+    "moves": ["Water Pulse", "Charm", "Weather Ball", "Haze"]
+  },
+  {
+    "name": "Jolteon",
+    "types": ["electric"],
+    "ability": "Volt Absorb",
+    "moves": ["Thunderbolt", "Swift", "Shadow Ball", "Helping Hand"]
+  },
+  {
+    "name": "Flareon",
+    "types": ["fire"],
+    "ability": "Flash Fire",
+    "moves": [
+      "Burning Jealousy",
+      "Shadow Ball",
+      "Baby-doll Eyes",
+      "Last Resort"
+    ]
+  },
+  {
+    "name": "Porygon",
+    "types": ["normal"],
+    "ability": "Download",
+    "moves": ["Foul Play", "Ice Beam", "Thunderbolt", "Hyper Beam"]
+  },
+  {
+    "name": "Dragonair",
+    "types": ["dragon"],
+    "ability": "Shed Skin",
+    "moves": ["Blizzard", "Breaking Swipe", "Scale Shot", "Thunder"]
+  },
+  {
+    "name": "Noctowl",
+    "types": ["normal", "flying"],
+    "ability": "Tinted Lens",
+    "moves": ["Echoed Voice", "Reflect", "Sky Attack", "Hypnosis"]
+  },
+  {
+    "name": "Lanturn",
+    "types": ["water", "electric"],
+    "ability": "Volt Absorb",
+    "moves": ["Water Pulse", "Hydro Pump", "Thunderbolt", "Confuse Ray"]
+  },
+  {
+    "name": "Togetic",
+    "types": ["fairy", "flying"],
+    "ability": "Serene Grace",
+    "moves": ["Life Dew", "Follow Me", "Play Rough", "Mystical Fire"]
+  },
+  {
+    "name": "Xatu",
+    "types": ["psychic", "flying"],
+    "ability": "Magic Bounce",
+    "moves": ["Psychic", "Simple Beam", "Air Slash", "Confuse Ray"]
+  },
+  {
+    "name": "Bellossom",
+    "types": ["grass"],
+    "ability": "Healer",
+    "moves": ["Grassy Terrain", "Giga Drain", "Helping Hand", "Dazzling Gleam"]
+  },
+  {
+    "name": "Azumarill",
+    "types": ["water", "fairy"],
+    "ability": "Sap Sipper",
+    "moves": ["Aqua Jet", "Play Rough", "Aqua Tail", "Bounce"]
+  },
+  {
+    "name": "Sudowoodo",
+    "types": ["rock"],
+    "ability": "Sturdy",
+    "moves": ["Stomping Tantrum", "Stone Edge", "Iron Defense", "Body Press"]
+  },
+  {
+    "name": "Politoed",
+    "types": ["water"],
+    "ability": "Drizzle",
+    "moves": ["Liquidation", "Round", "Earth Power", "Helping Hand"]
+  },
+  {
+    "name": "Quagsire",
+    "types": ["water", "ground"],
+    "ability": "Unaware",
+    "moves": ["Focus Blast", "Scald", "Toxic", "Amnesia"]
+  },
+  {
+    "name": "Slowking",
+    "types": ["water", "psychic"],
+    "ability": "Own Tempo",
+    "moves": ["Future Sight", "Nasty Plot", "Razor Shell", "Ice Punch"]
+  },
+  {
+    "name": "Dunsparce",
+    "types": ["normal"],
+    "ability": "Serene Grace",
+    "moves": ["Skitter Smack", "Dual Wingbeat", "Shadow Ball", "Ice Beam"]
+  },
+  {
+    "name": "Qwilfish",
+    "types": ["water", "poison"],
+    "ability": "Intimidate",
+    "moves": ["Swords Dance", "Poison Jab", "Liquidation", "Steel Roller"]
+  },
+  {
+    "name": "Sneasel",
+    "types": ["dark", "ice"],
+    "ability": "Keen Eye",
+    "moves": ["Triple Axel", "Lash Out", "Throat Chop", "Snarl"]
+  },
+  {
+    "name": "Piloswine",
+    "types": ["ice", "ground"],
+    "ability": "Thick Fat",
+    "moves": ["Blizzard", "Rock Tomb", "Ice Shard", "Superpower"]
+  },
+  {
+    "name": "Octillery",
+    "types": ["water"],
+    "ability": "Sniper",
+    "moves": ["Skitter Smack", "Flash Cannon", "Scald", "Acid Spray"]
+  },
+  {
+    "name": "Mantine",
+    "types": ["water", "flying"],
+    "ability": "Water Absorb",
+    "moves": ["Air Slash", "Dive", "Wide Guard", "Water Pulse"]
+  },
+  {
+    "name": "Skarmory",
+    "types": ["steel", "flying"],
+    "ability": "Weak Armor",
+    "moves": ["Assurance", "Steel Wing", "X-scissor", "Fly"]
+  },
+  {
+    "name": "Hitmontop",
+    "types": ["fighting"],
+    "ability": "Intimidate",
+    "moves": ["Drill Run", "Triple Axel", "Brick Break", "Coaching"]
+  },
+  {
+    "name": "Miltank",
+    "types": ["normal"],
+    "ability": "Scrappy",
+    "moves": ["Mega Kick", "Milk Drink", "Thunder Wave", "Play Rough"]
+  },
+  {
+    "name": "Grovyle",
+    "types": ["grass"],
+    "ability": "Overgrow",
+    "moves": ["Grass Pledge", "Screech", "Brick Break", "Endure"]
+  },
+  {
+    "name": "Sceptile",
+    "types": ["grass"],
+    "ability": "Unburden",
+    "moves": ["Grass Pledge", "Breaking Swipe", "Leaf Storm", "X-scissor"]
+  },
+  {
+    "name": "Combusken",
+    "types": ["fire", "fighting"],
+    "ability": "Blaze",
+    "moves": ["Fire Pledge", "Focus Blast", "Feather Dance", "Low Sweep"]
+  },
+  {
+    "name": "Blaziken",
+    "types": ["fire", "fighting"],
+    "ability": "Speed Boost",
+    "moves": ["Fire Pledge", "Blaze Kick", "Close Combat", "Coaching"]
+  },
+  {
+    "name": "Marshtomp",
+    "types": ["water", "ground"],
+    "ability": "Torrent",
+    "moves": ["Water Pledge", "Waterfall", "Dig", "Ice Punch"]
+  },
+  {
+    "name": "Swampert",
+    "types": ["water", "ground"],
+    "ability": "Damp",
+    "moves": ["Water Pledge", "Blizzard", "Earth Power", "Amnesia"]
+  },
+  {
+    "name": "Linoone",
+    "types": ["normal"],
+    "ability": "Pickup",
+    "moves": ["Slash", "Pin Missile", "Baby-doll Eyes", "Shadow Claw"]
+  },
+  {
+    "name": "Linoone",
+    "types": ["dark", "normal"],
+    "ability": "Pickup",
+    "moves": ["Throat Chop", "Snarl", "Taunt", "Substitute"]
+  },
+  {
+    "name": "Pelipper",
+    "types": ["water", "flying"],
+    "ability": "Drizzle",
+    "moves": ["Dual Wingbeat", "Weather Ball", "Wide Guard", "Quick Attack"]
+  },
+  {
+    "name": "Ninjask",
+    "types": ["bug", "flying"],
+    "ability": "Speed Boost",
+    "moves": ["Fury Cutter", "Substitute", "Mud-slap", "Skitter Smack"]
+  },
+  {
+    "name": "Exploud",
+    "types": ["normal"],
+    "ability": "Scrappy",
+    "moves": ["Terrain Pulse", "Hyper Beam", "Focus Blast", "Blizzard"]
+  },
+  {
+    "name": "Lairon",
+    "types": ["steel", "rock"],
+    "ability": "Sturdy",
+    "moves": ["Steel Roller", "Iron Tail", "Rock Slide", "Metal Sound"]
+  },
+  {
+    "name": "Manectric",
+    "types": ["electric"],
+    "ability": "Lightning Rod",
+    "moves": ["Rising Voltage", "Swift", "Overheat", "Psychic Fangs"]
+  },
+  {
+    "name": "Roselia",
+    "types": ["grass", "poison"],
+    "ability": "Poison Point",
+    "moves": ["Leaf Storm", "Extrasensory", "Weather Ball", "Life Dew"]
+  },
+  {
+    "name": "Sharpedo",
+    "types": ["water", "dark"],
+    "ability": "Speed Boost",
+    "moves": ["Aqua Jet", "Assurance", "Swagger", "Scale Shot"]
+  },
+  {
+    "name": "Wailmer",
+    "types": ["water"],
+    "ability": "Water Veil",
+    "moves": ["Brine", "Steel Roller", "Bounce", "Endure"]
+  },
+  {
+    "name": "Torkoal",
+    "types": ["fire"],
+    "ability": "Drought",
+    "moves": ["Burning Jealousy", "Inferno", "Rapid Spin", "Smokescreen"]
+  },
+  {
+    "name": "Flygon",
+    "types": ["ground", "dragon"],
+    "ability": "Levitate",
+    "moves": ["Steel Wing", "Dragon Claw", "Bug Buzz", "Mud-slap"]
+  },
+  {
+    "name": "Altaria",
+    "types": ["dragon", "flying"],
+    "ability": "Cloud Nine",
+    "moves": ["Dazzling Gleam", "Heat Wave", "Cotton Guard", "Dragon Pulse"]
+  },
+  {
+    "name": "Whiscash",
+    "types": ["water", "ground"],
+    "ability": "Hydration",
+    "moves": ["Bounce", "Belch", "Muddy Water", "Zen Headbutt"]
+  },
+  {
+    "name": "Crawdaunt",
+    "types": ["water", "dark"],
+    "ability": "Adaptability",
+    "moves": ["Lash Out", "Facade", "Muddy Water", "Swords Dance"]
+  },
+  {
+    "name": "Claydol",
+    "types": ["ground", "psychic"],
+    "ability": "Levitate",
+    "moves": ["Trick Room", "Psychic", "Ancient Power", "Hyper Beam"]
+  },
+  {
+    "name": "Cradily",
+    "types": ["rock", "grass"],
+    "ability": "Suction Cups",
+    "moves": ["Energy Ball", "Ancient Power", "Gastro Acid", "Sludge Bomb"]
+  },
+  {
+    "name": "Armaldo",
+    "types": ["rock", "bug"],
+    "ability": "Battle Armor",
+    "moves": ["X-scissor", "Smack Down", "Stomping Tantrum", "Sandstorm"]
+  },
+  {
+    "name": "Dusclops",
+    "types": ["ghost"],
+    "ability": "Pressure",
+    "moves": ["Shadow Sneak", "Hex", "Gravity", "Skitter Smack"]
+  },
+  {
+    "name": "Absol",
+    "types": ["dark"],
+    "ability": "Pressure",
+    "moves": ["Blizzard", "Night Slash", "Slash", "Fire Blast"]
+  },
+  {
+    "name": "Glalie",
+    "types": ["ice"],
+    "ability": "Ice Body",
+    "moves": ["Steel Roller", "Crunch", "Ice Fang", "Fake Tears"]
+  },
+  {
+    "name": "Sealeo",
+    "types": ["ice", "water"],
+    "ability": "Thick Fat",
+    "moves": ["Ice Beam", "Brine", "Dive", "Swagger"]
+  },
+  {
+    "name": "Relicanth",
+    "types": ["water", "rock"],
+    "ability": "Rock Head",
+    "moves": ["Liquidation", "Head Smash", "Flail", "Scale Shot"]
+  },
+  {
+    "name": "Metang",
+    "types": ["steel", "psychic"],
+    "ability": "Clear Body",
+    "moves": ["Meteor Mash", "Thunder Punch", "Psycho Cut", "Reflect"]
+  },
+  {
+    "name": "Luxray",
+    "types": ["electric"],
+    "ability": "Guts",
+    "moves": ["Facade", "Light Screen", "Rising Voltage", "Electric Terrain"]
+  },
+  {
+    "name": "Vespiquen",
+    "types": ["bug", "flying"],
+    "ability": "Pressure",
+    "moves": ["Attack Order", "Swagger", "Dual Wingbeat", "Revenge"]
+  },
+  {
+    "name": "Cherrim",
+    "types": ["grass"],
+    "ability": "Flower Gift",
+    "moves": ["Solar Beam", "Worry Seed", "Sunny Day", "Weather Ball"]
+  },
+  {
+    "name": "Gastrodon",
+    "types": ["water", "ground"],
+    "ability": "Sand Force",
+    "moves": ["Body Slam", "Skitter Smack", "Rock Tomb", "Waterfall"]
+  },
+  {
+    "name": "Drifblim",
+    "types": ["ghost", "flying"],
+    "ability": "Aftermath",
+    "moves": ["Will-o-wisp", "Psychic", "Tailwind", "Thunderbolt"]
+  },
+  {
+    "name": "Lopunny",
+    "types": ["normal"],
+    "ability": "Cute Charm",
+    "moves": ["Drain Punch", "Mega Kick", "Charm", "Bounce"]
+  },
+  {
+    "name": "Skuntank",
+    "types": ["poison", "dark"],
+    "ability": "Aftermath",
+    "moves": ["Lash Out", "Burning Jealousy", "Acid Spray", "Sucker Punch"]
+  },
+  {
+    "name": "Bronzong",
+    "types": ["steel", "psychic"],
+    "ability": "Levitate",
+    "moves": ["Zen Headbutt", "Metal Sound", "Steel Roller", "Skill Swap"]
+  },
+  {
+    "name": "Munchlax",
+    "types": ["normal"],
+    "ability": "Thick Fat",
+    "moves": ["Thunder Punch", "Fire Punch", "Body Slam", "Gunk Shot"]
+  },
+  {
+    "name": "Drapion",
+    "types": ["poison", "dark"],
+    "ability": "Battle Armor",
+    "moves": ["Lash Out", "X-scissor", "Acupressure", "Iron Tail"]
+  },
+  {
+    "name": "Abomasnow",
+    "types": ["grass", "ice"],
+    "ability": "Soundproof",
+    "moves": ["Avalanche", "Aurora Veil", "Round", "Grassy Glide"]
+  },
+  {
+    "name": "Froslass",
+    "types": ["ice", "ghost"],
+    "ability": "Snow Cloak",
+    "moves": ["Triple Axel", "Frost Breath", "Aurora Veil", "Shadow Ball"]
+  },
+  {
+    "name": "Rotom",
+    "types": ["electric", "ghost"],
+    "ability": "Levitate",
+    "moves": ["Electro Ball", "Will-o-wisp", "Nasty Plot", "Hex"]
+  },
+  {
+    "name": "Stoutland",
+    "types": ["normal"],
+    "ability": "Scrappy",
+    "moves": ["Giga Impact", "Facade", "Round", "Baby-doll Eyes"]
+  },
+  {
+    "name": "Liepard",
+    "types": ["dark"],
+    "ability": "Limber",
+    "moves": ["Assurance", "Play Rough", "Torment", "Screech"]
+  },
+  {
+    "name": "Musharna",
+    "types": ["psychic"],
+    "ability": "Forewarn",
+    "moves": ["Expanding Force", "Psyshock", "Yawn", "Energy Ball"]
+  },
+  {
+    "name": "Unfezant",
+    "types": ["normal", "flying"],
+    "ability": "Big Pecks",
+    "moves": ["Dual Wingbeat", "Taunt", "Feather Dance", "Tailwind"]
+  },
+  {
+    "name": "Boldore",
+    "types": ["rock"],
+    "ability": "Sturdy",
+    "moves": ["Stone Edge", "Iron Defense", "Body Press", "Stomping Tantrum"]
+  },
+  {
+    "name": "Swoobat",
+    "types": ["psychic", "flying"],
+    "ability": "Simple",
+    "moves": ["Simple Beam", "Speed Swap", "Psychic", "Air Slash"]
+  },
+  {
+    "name": "Audino",
+    "types": ["normal"],
+    "ability": "Healer",
+    "moves": ["Life Dew", "Draining Kiss", "Hyper Voice", "Flamethrower"]
+  },
+  {
+    "name": "Gurdurr",
+    "types": ["fighting"],
+    "ability": "Guts",
+    "moves": ["Focus Punch", "Coaching", "Brick Break", "High Horsepower"]
+  },
+  {
+    "name": "Palpitoad",
+    "types": ["water", "ground"],
+    "ability": "Swift Swim",
+    "moves": ["Echoed Voice", "Scald", "Earth Power", "Bounce"]
+  },
+  {
+    "name": "Seismitoad",
+    "types": ["water", "ground"],
+    "ability": "Swift Swim",
+    "moves": ["Echoed Voice", "Supersonic", "Sludge Bomb", "Screech"]
+  },
+  {
+    "name": "Scolipede",
+    "types": ["bug", "poison"],
+    "ability": "Swarm",
+    "moves": ["Steel Roller", "Toxic", "Throat Chop", "Megahorn"]
+  },
+  {
+    "name": "Whimsicott",
+    "types": ["grass", "fairy"],
+    "ability": "Prankster",
+    "moves": ["Hurricane", "Taunt", "Energy Ball", "Play Rough"]
+  },
+  {
+    "name": "Lilligant",
+    "types": ["grass"],
+    "ability": "Own Tempo",
+    "moves": ["Petal Dance", "Quiver Dance", "Light Screen", "Pollen Puff"]
+  },
+  {
+    "name": "Basculin",
+    "types": ["water"],
+    "ability": "Adaptability",
+    "moves": ["Liquidation", "Dive", "Psychic Fangs", "Ice Fang"]
+  },
+  {
+    "name": "Basculin",
+    "types": ["water"],
+    "ability": "Adaptability",
+    "moves": ["Scald", "Dive", "Crunch", "Substitute"]
+  },
+  {
+    "name": "Krookodile",
+    "types": ["ground", "dark"],
+    "ability": "Anger Point",
+    "moves": ["Earth Power", "Swagger", "Darkest Lariat", "Sandstorm"]
+  },
+  {
+    "name": "Maractus",
+    "types": ["grass"],
+    "ability": "Storm Drain",
+    "moves": ["Leaf Storm", "Energy Ball", "Sucker Punch", "Acupressure"]
+  },
+  {
+    "name": "Crustle",
+    "types": ["bug", "rock"],
+    "ability": "Shell Armor",
+    "moves": ["Shell Smash", "X-scissor", "Rock Tomb", "Body Press"]
+  },
+  {
+    "name": "Sigilyph",
+    "types": ["psychic", "flying"],
+    "ability": "Wonder Skin",
+    "moves": ["Psychic", "Rain Dance", "Air Slash", "Flash Cannon"]
+  },
+  {
+    "name": "Cofagrigus",
+    "types": ["ghost"],
+    "ability": "Mummy",
+    "moves": ["Shadow Ball", "Haze", "Psychic", "Wonder Room"]
+  },
+  {
+    "name": "Garbodor",
+    "types": ["poison"],
+    "ability": "Aftermath",
+    "moves": ["Gunk Shot", "Sludge Bomb", "Drain Punch", "Venom Drench"]
+  },
+  {
+    "name": "Cinccino",
+    "types": ["normal"],
+    "ability": "Technician",
+    "moves": ["Echoed Voice", "Tail Slap", "Light Screen", "Triple Axel"]
+  },
+  {
+    "name": "Vanillish",
+    "types": ["ice"],
+    "ability": "Ice Body",
+    "moves": ["Mist", "Ice Beam", "Blizzard", "Hyper Voice"]
+  },
+  {
+    "name": "Emolga",
+    "types": ["electric", "flying"],
+    "ability": "Static",
+    "moves": ["Acrobatics", "Rising Voltage", "Endure", "Electroweb"]
+  },
+  {
+    "name": "Escavalier",
+    "types": ["bug", "steel"],
+    "ability": "Shell Armor",
+    "moves": ["Drill Run", "Razor Shell", "Fury Cutter", "Taunt"]
+  },
+  {
+    "name": "Amoonguss",
+    "types": ["grass", "poison"],
+    "ability": "Effect Spore",
+    "moves": ["Clear Smog", "Rage Powder", "Giga Drain", "Venoshock"]
+  },
+  {
+    "name": "Jellicent",
+    "types": ["water", "ghost"],
+    "ability": "Water Absorb",
+    "moves": ["Dazzling Gleam", "Dive", "Trick Room", "Icy Wind"]
+  },
+  {
+    "name": "Galvantula",
+    "types": ["bug", "electric"],
+    "ability": "Compoundeyes",
+    "moves": ["Thunder", "Bug Buzz", "Electro Ball", "Electroweb"]
+  },
+  {
+    "name": "Klang",
+    "types": ["steel"],
+    "ability": "Minus",
+    "moves": ["Charge Beam", "Rising Voltage", "Flash Cannon", "Power Gem"]
+  },
+  {
+    "name": "Klinklang",
+    "types": ["steel"],
+    "ability": "Plus",
+    "moves": ["Gear Grind", "Shift Gear", "Giga Impact", "Metal Sound"]
+  },
+  {
+    "name": "Beheeyem",
+    "types": ["psychic"],
+    "ability": "Synchronize",
+    "moves": ["Expanding Force", "Meteor Beam", "Dark Pulse", "Round"]
+  },
+  {
+    "name": "Lampent",
+    "types": ["ghost", "fire"],
+    "ability": "Flash Fire",
+    "moves": ["Burning Jealousy", "Skitter Smack", "Inferno", "Trick Room"]
+  },
+  {
+    "name": "Fraxure",
+    "types": ["dragon"],
+    "ability": "Rivalry",
+    "moves": ["Giga Impact", "Outrage", "Breaking Swipe", "X-scissor"]
+  },
+  {
+    "name": "Beartic",
+    "types": ["ice"],
+    "ability": "Slush Rush",
+    "moves": ["Body Press", "Blizzard", "Frost Breath", "Brine"]
+  },
+  {
+    "name": "Cryogonal",
+    "types": ["ice"],
+    "ability": "Levitate",
+    "moves": ["Blizzard", "Ice Beam", "Reflect", "Solar Beam"]
+  },
+  {
+    "name": "Accelgor",
+    "types": ["bug"],
+    "ability": "Hydration",
+    "moves": ["Struggle Bug", "Acid Spray", "Rain Dance", "Bug Buzz"]
+  },
+  {
+    "name": "Stunfisk",
+    "types": ["ground", "electric"],
+    "ability": "Static",
+    "moves": ["Electric Terrain", "Thunderbolt", "Earth Power", "Muddy Water"]
+  },
+  {
+    "name": "Stunfisk",
+    "types": ["ground", "steel"],
+    "ability": "Mimicry",
+    "moves": ["Metal Sound", "Terrain Pulse", "Foul Play", "Earth Power"]
+  },
+  {
+    "name": "Mienshao",
+    "types": ["fighting"],
+    "ability": "Inner Focus",
+    "moves": ["Aura Sphere", "Wide Guard", "Rock Tomb", "Mega Kick"]
+  },
+  {
+    "name": "Druddigon",
+    "types": ["dragon"],
+    "ability": "Sheer Force",
+    "moves": ["Lash Out", "Dual Wingbeat", "Iron Head", "Dig"]
+  },
+  {
+    "name": "Golurk",
+    "types": ["ground", "ghost"],
+    "ability": "Iron Fist",
+    "moves": ["Focus Punch", "Shadow Punch", "Scorching Sands", "Safeguard"]
+  },
+  {
+    "name": "Bisharp",
+    "types": ["dark", "steel"],
+    "ability": "Inner Focus",
+    "moves": ["Night Slash", "Poison Jab", "Psycho Cut", "Metal Sound"]
+  },
+  {
+    "name": "Bouffalant",
+    "types": ["normal"],
+    "ability": "Sap Sipper",
+    "moves": ["Body Slam", "Lash Out", "Smart Strike", "Superpower"]
+  },
+  {
+    "name": "Heatmor",
+    "types": ["fire"],
+    "ability": "Flash Fire",
+    "moves": ["Fire Lash", "Overheat", "Sunny Day", "Solar Beam"]
+  },
+  {
+    "name": "Durant",
+    "types": ["bug", "steel"],
+    "ability": "Swarm",
+    "moves": ["Thunder Fang", "X-scissor", "Metal Sound", "Metal Claw"]
+  },
+  {
+    "name": "Diggersby",
+    "types": ["normal", "ground"],
+    "ability": "Huge Power",
+    "moves": ["Stone Edge", "Stomping Tantrum", "Dig", "Quick Attack"]
+  },
+  {
+    "name": "Talonflame",
+    "types": ["fire", "flying"],
+    "ability": "Gale Wings",
+    "moves": ["Tailwind", "Hurricane", "Steel Wing", "Flamethrower"]
+  },
+  {
+    "name": "Pangoro",
+    "types": ["fighting", "dark"],
+    "ability": "Iron Fist",
+    "moves": ["Bullet Punch", "Hammer Arm", "Darkest Lariat", "Coaching"]
+  },
+  {
+    "name": "Doublade",
+    "types": ["steel", "ghost"],
+    "ability": "No Guard",
+    "moves": ["Iron Head", "Swords Dance", "Sacred Sword", "Aerial Ace"]
+  },
+  {
+    "name": "Malamar",
+    "types": ["dark", "psychic"],
+    "ability": "Contrary",
+    "moves": ["Topsy-turvy", "Expanding Force", "Night Slash", "Thunderbolt"]
+  },
+  {
+    "name": "Barbaracle",
+    "types": ["rock", "water"],
+    "ability": "Tough Claws",
+    "moves": ["Razor Shell", "Blizzard", "Skull Bash", "Poison Jab"]
+  },
+  {
+    "name": "Heliolisk",
+    "types": ["electric", "normal"],
+    "ability": "Dry Skin",
+    "moves": ["Electro Ball", "Agility", "Round", "Mud-slap"]
+  },
+  {
+    "name": "Tyrantrum",
+    "types": ["rock", "dragon"],
+    "ability": "Strong Jaw",
+    "moves": ["Scale Shot", "Rock Blast", "Superpower", "Body Slam"]
+  },
+  {
+    "name": "Aurorus",
+    "types": ["rock", "ice"],
+    "ability": "Refrigerate",
+    "moves": ["Body Slam", "Thunder", "Ancient Power", "Thunder Wave"]
+  },
+  {
+    "name": "Hawlucha",
+    "types": ["fighting", "flying"],
+    "ability": "Limber",
+    "moves": ["Taunt", "Poison Jab", "Throat Chop", "Low Sweep"]
+  },
+  {
+    "name": "Dedenne",
+    "types": ["electric", "fairy"],
+    "ability": "Plus",
+    "moves": ["Entrainment", "Thunder", "Dazzling Gleam", "Substitute"]
+  },
+  {
+    "name": "Klefki",
+    "types": ["steel", "fairy"],
+    "ability": "Prankster",
+    "moves": ["Light Screen", "Crafty Shield", "Flash Cannon", "Play Rough"]
+  },
+  {
+    "name": "Trevenant",
+    "types": ["ghost", "grass"],
+    "ability": "Harvest",
+    "moves": ["Horn Leech", "Reflect", "Drain Punch", "Trick Room"]
+  },
+  {
+    "name": "Gourgeist",
+    "types": ["ghost", "grass"],
+    "ability": "Pickup",
+    "moves": ["Mystical Fire", "Shadow Sneak", "Worry Seed", "Scary Face"]
+  },
+  {
+    "name": "Charjabug",
+    "types": ["bug", "electric"],
+    "ability": "Battery",
+    "moves": ["String Shot", "Eerie Impulse", "Spark", "Dig"]
+  },
+  {
+    "name": "Vikavolt",
+    "types": ["bug", "electric"],
+    "ability": "Levitate",
+    "moves": ["Spark", "Mud-slap", "Poison Jab", "Bug Buzz"]
+  },
+  {
+    "name": "Ribombee",
+    "types": ["bug", "fairy"],
+    "ability": "Sweet Veil",
+    "moves": ["Pollen Puff", "Draining Kiss", "Aromatherapy", "Fake Tears"]
+  },
+  {
+    "name": "Lycanroc",
+    "types": ["rock"],
+    "ability": "Sand Rush",
+    "moves": ["Accelerock", "Stone Edge", "Round", "Howl"]
+  },
+  {
+    "name": "Lycanroc",
+    "types": ["rock"],
+    "ability": "No Guard",
+    "moves": ["Stone Edge", "Brick Break", "Taunt", "Crunch"]
+  },
+  {
+    "name": "Mudsdale",
+    "types": ["ground"],
+    "ability": "Own Tempo",
+    "moves": ["Lash Out", "Superpower", "Sand Tomb", "Rock Smash"]
+  },
+  {
+    "name": "Araquanid",
+    "types": ["water", "bug"],
+    "ability": "Water Absorb",
+    "moves": ["Liquidation", "Entrainment", "Lunge", "Poison Jab"]
+  },
+  {
+    "name": "Lurantis",
+    "types": ["grass"],
+    "ability": "Contrary",
+    "moves": ["Leaf Storm", "Weather Ball", "X-scissor", "Round"]
+  },
+  {
+    "name": "Shiinotic",
+    "types": ["grass", "fairy"],
+    "ability": "Rain Dish",
+    "moves": ["Strength Sap", "Moonblast", "Rain Dance", "Weather Ball"]
+  },
+  {
+    "name": "Salazzle",
+    "types": ["poison", "fire"],
+    "ability": "Corrosion",
+    "moves": ["Toxic", "Flamethrower", "Cross Poison", "Venom Drench"]
+  },
+  {
+    "name": "Bewear",
+    "types": ["normal", "fighting"],
+    "ability": "Klutz",
+    "moves": ["Double-edge", "Baby-doll Eyes", "Payback", "Giga Impact"]
+  },
+  {
+    "name": "Tsareena",
+    "types": ["grass"],
+    "ability": "Queenly Majesty",
+    "moves": ["Aromatherapy", "Trop Kick", "Acrobatics", "Swagger"]
+  },
+  {
+    "name": "Comfey",
+    "types": ["fairy"],
+    "ability": "Triage",
+    "moves": ["Floral Healing", "Draining Kiss", "After You", "Energy Ball"]
+  },
+  {
+    "name": "Oranguru",
+    "types": ["normal", "psychic"],
+    "ability": "Symbiosis",
+    "moves": ["Instruct", "Light Screen", "Psychic", "Psyshock"]
+  },
+  {
+    "name": "Passimian",
+    "types": ["fighting"],
+    "ability": "Receiver",
+    "moves": ["Brick Break", "Rock Tomb", "Substitute", "Acrobatics"]
+  },
+  {
+    "name": "Palossand",
+    "types": ["ghost", "ground"],
+    "ability": "Sand Veil",
+    "moves": ["Terrain Pulse", "Scorching Sands", "Shore Up", "Shadow Ball"]
+  },
+  {
+    "name": "Pyukumuku",
+    "types": ["water"],
+    "ability": "Innards Out",
+    "moves": ["Toxic", "Taunt", "Venom Drench", "Counter"]
+  },
+  {
+    "name": "Togedemaru",
+    "types": ["electric", "steel"],
+    "ability": "Sturdy",
+    "moves": ["Nuzzle", "Poison Jab", "Electroweb", "Iron Head"]
+  },
+  {
+    "name": "Mimikyu",
+    "types": ["ghost", "fairy"],
+    "ability": "Disguise",
+    "moves": ["Shadow Claw", "Slash", "Baby-doll Eyes", "Curse"]
+  },
+  {
+    "name": "Greedent",
+    "types": ["normal"],
+    "ability": "Cheek Pouch",
+    "moves": ["Gyro Ball", "Psychic Fangs", "Swords Dance", "Body Slam"]
+  },
+  {
+    "name": "Orbeetle",
+    "types": ["bug", "psychic"],
+    "ability": "Swarm",
+    "moves": ["After You", "Psychic", "Psybeam", "Struggle Bug"]
+  },
+  {
+    "name": "Thievul",
+    "types": ["dark"],
+    "ability": "Unburden",
+    "moves": ["Foul Play", "Snarl", "Taunt", "Burning Jealousy"]
+  },
+  {
+    "name": "Eldegoss",
+    "types": ["grass"],
+    "ability": "Effect Spore",
+    "moves": ["Light Screen", "Weather Ball", "Cotton Guard", "Leaf Storm"]
+  },
+  {
+    "name": "Dubwool",
+    "types": ["normal"],
+    "ability": "Fluffy",
+    "moves": ["Grassy Glide", "Mega Kick", "Body Press", "Substitute"]
+  },
+  {
+    "name": "Drednaw",
+    "types": ["water", "rock"],
+    "ability": "Strong Jaw",
+    "moves": ["Razor Shell", "Skitter Smack", "Smart Strike", "Rock Slide"]
+  },
+  {
+    "name": "Boltund",
+    "types": ["electric"],
+    "ability": "Strong Jaw",
+    "moves": ["Rising Voltage", "Crunch", "Charm", "Helping Hand"]
+  },
+  {
+    "name": "Carkol",
+    "types": ["rock", "fire"],
+    "ability": "Flash Fire",
+    "moves": ["Overheat", "Fire Spin", "Reflect", "Rock Slide"]
+  },
+  {
+    "name": "Coalossal",
+    "types": ["rock", "fire"],
+    "ability": "Steam Engine",
+    "moves": ["Smokescreen", "Meteor Beam", "Flamethrower", "Scald"]
+  },
+  {
+    "name": "Sandaconda",
+    "types": ["ground"],
+    "ability": "Sand Spit",
+    "moves": ["Scorching Sands", "Scale Shot", "Skitter Smack", "Glare"]
+  },
+  {
+    "name": "Cramorant",
+    "types": ["flying", "water"],
+    "ability": "Gulp Missile",
+    "moves": ["Dive", "Endure", "Amnesia", "Throat Chop"]
+  },
+  {
+    "name": "Barraskewda",
+    "types": ["water"],
+    "ability": "Swift Swim",
+    "moves": ["Aqua Jet", "Scale Shot", "Assurance", "Endure"]
+  },
+  {
+    "name": "Toxtricity",
+    "types": ["electric", "poison"],
+    "ability": "Plus",
+    "moves": ["Rising Voltage", "Thunder Wave", "Hyper Voice", "Tearful Look"]
+  },
+  {
+    "name": "Centiskorch",
+    "types": ["fire", "bug"],
+    "ability": "White Smoke",
+    "moves": ["Flamethrower", "Scorching Sands", "Venoshock", "Slam"]
+  },
+  {
+    "name": "Grapploct",
+    "types": ["fighting"],
+    "ability": "Limber",
+    "moves": ["Topsy-turvy", "Drain Punch", "Muddy Water", "Focus Blast"]
+  },
+  {
+    "name": "Polteageist",
+    "types": ["ghost"],
+    "ability": "Weak Armor",
+    "moves": ["Aromatherapy", "Sucker Punch", "Psyshock", "Giga Drain"]
+  },
+  {
+    "name": "Hatterene",
+    "types": ["psychic", "fairy"],
+    "ability": "Anticipation",
+    "moves": ["Expanding Force", "Play Rough", "Life Dew", "Safeguard"]
+  },
+  {
+    "name": "Grimmsnarl",
+    "types": ["dark", "fairy"],
+    "ability": "Prankster",
+    "moves": ["Power-up Punch", "Dark Pulse", "Power Swap", "Confide"]
+  },
+  {
+    "name": "Obstagoon",
+    "types": ["dark", "normal"],
+    "ability": "Reckless",
+    "moves": ["Lash Out", "Thunderbolt", "Facade", "Screech"]
+  },
+  {
+    "name": "Perrserker",
+    "types": ["steel"],
+    "ability": "Steely Spirit",
+    "moves": ["Metal Claw", "Amnesia", "Lash Out", "Thunder"]
+  },
+  {
+    "name": "Alcremie",
+    "types": ["fairy"],
+    "ability": "Aroma Veil",
+    "moves": ["Decorate", "Dazzling Gleam", "Mystical Fire", "Magical Leaf"]
+  },
+  {
+    "name": "Falinks",
+    "types": ["fighting"],
+    "ability": "Battle Armor",
+    "moves": ["First Impression", "Swords Dance", "Smart Strike", "Brick Break"]
+  },
+  {
+    "name": "Pincurchin",
+    "types": ["electric"],
+    "ability": "Electric Surge",
+    "moves": ["Hydro Pump", "Thunder", "Acupressure", "Venom Drench"]
+  },
+  {
+    "name": "Frosmoth",
+    "types": ["ice", "bug"],
+    "ability": "Ice Scales",
+    "moves": ["Weather Ball", "Tailwind", "Struggle Bug", "Hurricane"]
+  },
+  {
+    "name": "Indeedee",
+    "types": ["psychic", "normal"],
+    "ability": "Synchronize",
+    "moves": ["Mystical Fire", "Expanding Force", "Calm Mind", "Shadow Ball"]
+  },
+  {
+    "name": "Morpeko",
+    "types": ["electric", "dark"],
+    "ability": "Hunger Switch",
+    "moves": ["Aura Wheel", "Dark Pulse", "Thunderbolt", "Ice Fang"]
+  },
+  {
+    "name": "Copperajah",
+    "types": ["steel"],
+    "ability": "Sheer Force",
+    "moves": ["Iron Defense", "Body Press", "Flash Cannon", "Steel Roller"]
+  },
+  {
+    "name": "Duraludon",
+    "types": ["steel", "dragon"],
+    "ability": "Light Metal",
+    "moves": ["Breaking Swipe", "Thunder Wave", "Iron Head", "Thunderbolt"]
+  },
+  {
+    "name": "Drakloak",
+    "types": ["dragon", "ghost"],
+    "ability": "Clear Body",
+    "moves": ["Dragon Rush", "Assurance", "Will-o-wisp", "Shadow Ball"]
+  }
+]
