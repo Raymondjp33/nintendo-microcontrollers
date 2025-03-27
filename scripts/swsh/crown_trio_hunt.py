@@ -236,13 +236,13 @@ def main() -> int:
     x_val = 1143
     y_val = 640
 
-    currently_hunting = 'Virizion'
+    currently_hunting = 'Terrakion'
   
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
         time.sleep(1)
         # go_to_change_grip(ser)
-        # connect_and_go_to_game(ser)
-        # return 0
+        connect_and_go_to_game(ser)
+        return 0
         while True:
             start_time = time.time()
             # Open camp
@@ -296,7 +296,7 @@ def main() -> int:
                 write_shiny_text()
                 return 0
             
-            increment_counter(delay=delay, file_prefix=currently_hunting, frame=log_frame)
+            increment_counter(delay=delay, file_prefix=currently_hunting, frame=None)
 
             frame = _getframe(vid)
             while not numpy.array_equal(frame[669][1152], (255, 255, 255)):
