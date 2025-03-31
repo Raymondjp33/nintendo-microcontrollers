@@ -238,6 +238,27 @@ def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
 
     print('game loaded!')
 
+dynamax_turns = None
+def dynamax_if_available(vid: cv2.VideoCapture, ser: serial.Serial):
+    global dynamax_turns
+    frame = _getframe(vid)
+
+    dynamax_available = False
+
+    for _ in range(10):
+        if (_color_near(frame[590][728], (79, 0, 222))):
+            dynamax_available = True
+        time.sleep(0.1)
+        frame = _getframe(vid)
+    # print(f'Here! {frame[590][728]}')
+    if (_color_near(frame[590][728], (79, 0, 222))):
+        print('Dynamaxing!')
+        dynamax_turns = 3
+        _press(ser, 'a', sleep_time=0.5)
+        _press(ser, 'A', sleep_time=0.5)
+    else:
+        print('Not dynamaxing!')
+
 # E for effectivness and P for PP
 class Move(NamedTuple):
     e: str
@@ -245,9 +266,11 @@ class Move(NamedTuple):
     index: int
 
 move_index = 0
-def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial, fighting_legend: bool):
+def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial, battle_index: int):
+    fighting_legend = battle_index == 3
     print(f'Fighting, and we are fighting Zygarde: {fighting_legend}')
     global move_index
+    global dynamax_turns
     move1PTL = Point(y=445, x=1154)
     move1PBR = Point(y=487, x=1252)
 
@@ -259,9 +282,23 @@ def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial, fighting_legend:
         move1P = int(get_text(frame=frame, top_left=move1PTL, bottom_right=move1PBR, invert=True).split('/')[0])
     except:
         move1P = 0
+    
+    if not fighting_legend:
+        dynamax_if_available(vid, ser)
 
+    if (dynamax_turns is not None):
+        dynamax_turns -= 1
 
-    new_move_index = 2 if fighting_legend else 1 if move1P == 0 else 0
+    if (dynamax_turns is not None and dynamax_turns < 0):
+        dynamax_turns = None
+        move_index = 0
+
+    if battle_index == 0:
+        new_move_index = 2
+    if battle_index == 1 or battle_index == 2:
+        new_move_index = 0
+    if battle_index == 3:
+        new_move_index = 1
     print(f'Currently on move: {move_index}. About to use move: {new_move_index}')
     distance = move_index - new_move_index
 
@@ -318,11 +355,12 @@ def swap_if_needed(ser: serial.Serial, needs_to_swap: bool):
         _press(ser, 'B')
 
 selected = False
-def select_starter( ser: serial.Serial):
+def select_starter(ser: serial.Serial):
     global selected
     if (selected):
         return
     print('Selecting')
+    _press(ser, 's', count=2, sleep_time=0.5)
     _press(ser, 'A')
     selected = True
     
@@ -331,7 +369,7 @@ def handle_catch(ser: serial.Serial, is_legend:bool):
     _press(ser, 'A', sleep_time=1)
 
     if is_legend:
-        _press(ser, 'a', sleep_time=1)
+        _press(ser, 'a',count=2, sleep_time=1)
     
     _press(ser, 'A', sleep_time=1)
 
@@ -397,7 +435,7 @@ def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial):
     _press(ser, 'A')
 
 def select_path(ser: serial.Serial, battle_index: int):
-    path = 1 if battle_index == 0 or battle_index == 2 else 2
+    path = 0 if battle_index == 0 else 1
 
     print(f'Pathing and going over: {path}')
 
@@ -419,6 +457,7 @@ def main() -> int:
     battle_index = 0
     global move_index
     global selected
+    global dynamax_turns
     count = 0
 
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
@@ -437,14 +476,15 @@ def main() -> int:
             screen = get_screen(vid)
 
             if (screen == 'Fight'):
-                attack_with_move(vid, ser, fighting_legend=battle_index==3)
+                attack_with_move(vid, ser, battle_index=battle_index)
             
             if (screen == 'Swapping'):
-                swap_if_needed(ser, needs_to_swap=battle_index==3)
+                swap_if_needed(ser, needs_to_swap=False)
 
             if (screen == 'Catching'):
                 move_index = 0
                 battle_index += 1
+                dynamax_turns = None
                 handle_catch(ser, is_legend=battle_index==4)
 
             if (screen == 'Selecting'):
@@ -454,30 +494,33 @@ def main() -> int:
                 move_index = 0
                 battle_index = 0
                 selected = False
-                shiny_legend = handle_choose_pokemon(vid, ser, end_run=False)
+                dynamax_turns = None
+                shiny_legend = handle_choose_pokemon(vid, ser, end_run=True)
 
                 if (shiny_legend):
-                    _press(ser, 'C', duration=2)
-                    _press(ser, 'H', duration=1)
-                    _press(ser, 's', duration=0.25)
-                    _press(ser, 'd', duration=0.25)
-                    _press(ser, 'd', duration=0.25)
-                    _press(ser, 'd', duration=0.25)
-                    _press(ser, 'd', duration=0.25)
-                    _press(ser, 'd', duration=0.25)
-                    _press(ser, 'd', duration=0.25)
-                    _press(ser, 'A', duration=1)
-                    _press(ser, 'w', duration=1)
-                    _press(ser, 'A', duration=1)
-                    write_shiny_text()
+                    # _press(ser, 'C', duration=2)
+                    # _press(ser, 'H', duration=1)
+                    # _press(ser, 's', duration=0.25)
+                    # _press(ser, 'd', duration=0.25)
+                    # _press(ser, 'd', duration=0.25)
+                    # _press(ser, 'd', duration=0.25)
+                    # _press(ser, 'd', duration=0.25)
+                    # _press(ser, 'd', duration=0.25)
+                    # _press(ser, 'd', duration=0.25)
+                    # _press(ser, 'A', duration=1)
+                    # _press(ser, 'w', duration=1)
+                    # _press(ser, 'A', duration=1)
+                    # write_shiny_text()
                     break
                 
 
                 # restart_dungeon(vid, ser)
-                return 0
+                # return 0
 
             if (screen == 'Cheer On'):
                 print('Cheering')
+                if (dynamax_turns is not None):
+                    dynamax_turns = -1
                 _press(ser, 'A')
 
             if (screen == 'Pathing'):
