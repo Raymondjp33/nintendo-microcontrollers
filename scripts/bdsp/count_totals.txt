@@ -2,11 +2,17 @@ turtwig - 6440 (May have missed around 2000)
 dialga - 1478
 mesprit - 2042
 spiritomb - 3078
-cranidos - 43 / 5137
+cranidos - 43 / 5137 (Did not get a 2nd one)
 registeel - 2834
 regice - 7602
-cresselia - 
+regirock - 2246
+cresselia - 4889
 Tapu Bulu - 54 Raids
 Tapu Koko - 52 Raids
-Zapdos - 
+Zapdos - 220
+Zygarde - 
 Virizion - 2331
+Cobalion - 1535
+Terrakion - 1213
+Raikou - 1940
+Suicune - 
