@@ -337,7 +337,11 @@ def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial):
 
     _press(ser, 's' if distance < 0 else 'w', count=abs(distance), sleep_time=0.2)
     _press(ser, 'A', sleep_time=1)
-    _press(ser, 'A')
+    _press(ser, 'A', sleep_time=0.5)
+    
+    # Attempt using move on self if using it in general failed
+    _press(ser, 's', sleep_time=0.5)
+    _press(ser, 'A', sleep_time=0.5)
     fight_index = new_move_index
 
 
