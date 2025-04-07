@@ -124,7 +124,6 @@ def connect_and_go_to_game(ser: serial.Serial):
     _press(ser, 'A', duration=0.5)
     _press(ser, 'H', duration=0.1)
     _press(ser, 'A', sleep_time=1)
-    _press(ser, 'A')
     _press(ser, '0')
 
 def go_to_change_grip(ser: serial.Serial):
@@ -135,6 +134,8 @@ def go_to_change_grip(ser: serial.Serial):
     _press(ser, 'A')
     time.sleep(1)
     _press(ser, 'A')
+    # time.sleep(1)
+    # _press(ser, 'A')
     
 def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
     _press(ser, 'H')
@@ -152,18 +153,20 @@ def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
     print('game loaded!')
 
 def get_to_statue(ser: serial.Serial):
-    _press(ser, 'a', duration=0.3, sleep_time=0.3)
-    _press(ser, 'w', duration=2.5)
+    _press(ser, 'd', duration=0.3, sleep_time=0.3)
+    _press(ser, 'w', duration=3)
     _press(ser, 'A', sleep_time=1, count=3)
 
 def fill_pattern(ser: serial.Serial):
     _press(ser, 'a', duration=1, sleep_time=0.3)
-    _press(ser, 's', duration=0.8, sleep_time=0.3)
-    _press(ser, 'd', duration=2, sleep_time=0.3)
-    _press(ser, 's', duration=0.45, sleep_time=0.3)
-    _press(ser, 'a', duration=2.25, sleep_time=0.3)
-    _press(ser, 's', duration=0.45, sleep_time=0.3)
-    _press(ser, 'd', duration=2, sleep_time=0.3)
+    _press(ser, 's', duration=0.95, sleep_time=0.3)
+    _press(ser, 'd', duration=1.5, sleep_time=0.3)
+    _press(ser, 's', duration=0.3, sleep_time=0.3)
+    _press(ser, 'a', duration=1.4, sleep_time=0.3)
+    _press(ser, 's', duration=0.35, sleep_time=0.3)
+    _press(ser, 'd', duration=1.2, sleep_time=0.3)
+    _press(ser, 's', duration=0.30, sleep_time=0.3)
+    _press(ser, 'a', duration=1, sleep_time=0.3)
 
     time.sleep(4)
     _press(ser, 'A')
@@ -187,7 +190,7 @@ def main() -> int:
     x_val = 1143
     y_val = 640
 
-    currently_hunting = 'Registeel'
+    currently_hunting = 'Regidrago'
   
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
         time.sleep(1)
