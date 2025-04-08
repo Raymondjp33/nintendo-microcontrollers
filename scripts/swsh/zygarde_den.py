@@ -169,8 +169,9 @@ def match_text(
         return text == get_text(frame, top_left, bottom_right, invert=invert)
     return match_text_impl
 
-def increment_counter(file_prefix, frames=None):
+def increment_counter(file_prefix, frames=None, caught_legend=False):
     counter_path = Path(f'{file_prefix}-counter.txt')
+    total_dens_counter_path = Path(f'{file_prefix}-total-dens-counter.txt')
     # log_path = Path(f"{file_prefix}-log.txt")
     
     # Read the existing count (default to 0 if file does not exist)
@@ -183,16 +184,29 @@ def increment_counter(file_prefix, frames=None):
     else:
         count = 0
 
-    # Increment the counter
-    count += 1
+
+    if total_dens_counter_path.exists():
+        with total_dens_counter_path.open("r") as file:
+            try:
+                total_dens_count = int(file.read().strip())
+            except ValueError:
+                total_dens_count = 0
+    else:
+        total_dens_count = 0
+
+    total_dens_count += 1
+
+    if caught_legend:
+        count += 1
 
     # timestamp  = time.strftime('%Y-%m-%d %H:%M:%S')
     # star = '* ' if delay > 0.53 or delay < 0.47 else ''
     # log_data = f'{star}Count: {count} - Delay: {delay} - Timestamp {timestamp}'
 
     # Write the updated count back to the file
-    with counter_path.open("w") as file1:
+    with counter_path.open("w") as file1, total_dens_counter_path.open("w") as file2:
         file1.write(str(count))
+        file2.write(str(total_dens_count))
         # file2.write(log_data + '\n')
     
     if frames is not None:
@@ -251,7 +265,7 @@ def dynamax_if_available(vid: cv2.VideoCapture, ser: serial.Serial):
         time.sleep(0.1)
         frame = _getframe(vid)
     # print(f'Here! {frame[590][728]}')
-    if (_color_near(frame[590][728], (79, 0, 222))):
+    if (dynamax_available):
         print('Dynamaxing!')
         dynamax_turns = 3
         _press(ser, 'a', sleep_time=0.5)
@@ -275,7 +289,7 @@ def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial, battle_index: in
     move1PBR = Point(y=487, x=1252)
 
 
-    _press(ser, 'A', sleep_time=3)
+    _press(ser, 'A', sleep_time=1.5)
 
     frame = _getframe(vid)
     try:
@@ -294,8 +308,10 @@ def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial, battle_index: in
         move_index = 0
 
     if battle_index == 0:
+        new_move_index = 0
+    if battle_index == 1:
         new_move_index = 2
-    if battle_index == 1 or battle_index == 2:
+    if battle_index == 2:
         new_move_index = 0
     if battle_index == 3:
         new_move_index = 1
@@ -335,7 +351,7 @@ def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial, end_run = F
     print(f'We have processed all pokemon: {name_map}')
     _press(ser, 'B', sleep_time=4)
     if (contains_legendary):
-        increment_counter('Zygarde', frames=[log_frames[-1]])
+        increment_counter('Zygarde', frames=[log_frames[-1]], caught_legend=contains_legendary)
     last_key, last_value = next(reversed(name_map.items()))
     if (contains_legendary and last_value[1]):
         print(f'We have the shiny!')
@@ -360,7 +376,7 @@ def select_starter(ser: serial.Serial):
     if (selected):
         return
     print('Selecting')
-    _press(ser, 's', count=2, sleep_time=0.5)
+    _press(ser, 's', sleep_time=0.5)
     _press(ser, 'A')
     selected = True
     
@@ -369,7 +385,7 @@ def handle_catch(ser: serial.Serial, is_legend:bool):
     _press(ser, 'A', sleep_time=1)
 
     if is_legend:
-        _press(ser, 'a',count=2, sleep_time=1)
+        _press(ser, 'a', sleep_time=1)
     
     _press(ser, 'A', sleep_time=1)
 
@@ -435,7 +451,7 @@ def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial):
     _press(ser, 'A')
 
 def select_path(ser: serial.Serial, battle_index: int):
-    path = 0 if battle_index == 0 else 1
+    path = 1 if battle_index == 0 else 1 if battle_index == 1 else 2
 
     print(f'Pathing and going over: {path}')
 
@@ -479,7 +495,7 @@ def main() -> int:
                 attack_with_move(vid, ser, battle_index=battle_index)
             
             if (screen == 'Swapping'):
-                swap_if_needed(ser, needs_to_swap=False)
+                swap_if_needed(ser, needs_to_swap=battle_index == 1)
 
             if (screen == 'Catching'):
                 move_index = 0
@@ -495,7 +511,7 @@ def main() -> int:
                 battle_index = 0
                 selected = False
                 dynamax_turns = None
-                shiny_legend = handle_choose_pokemon(vid, ser, end_run=True)
+                shiny_legend = handle_choose_pokemon(vid, ser, end_run=False)
 
                 if (shiny_legend):
                     # _press(ser, 'C', duration=2)
@@ -514,7 +530,7 @@ def main() -> int:
                     break
                 
 
-                # restart_dungeon(vid, ser)
+                restart_dungeon(vid, ser)
                 # return 0
 
             if (screen == 'Cheer On'):
