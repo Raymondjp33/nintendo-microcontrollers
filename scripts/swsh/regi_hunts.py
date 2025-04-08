@@ -144,13 +144,6 @@ def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
     time.sleep(1)
     _press(ser, 'A')
 
-    frame = _getframe(vid)
-    while not _color_near(frame[50][90], (250, 250, 250)):
-        _press(ser, 'A')
-        _wait_and_render(vid, .15)
-        frame = _getframe(vid)
-
-    print('game loaded!')
 
 def get_to_statue(ser: serial.Serial):
     _press(ser, 'd', duration=0.3, sleep_time=0.3)
@@ -198,16 +191,17 @@ def main() -> int:
         # connect_and_go_to_game(ser)
         # get_to_statue(ser)
         # fill_pattern(ser)
+        # reset_game(ser, vid)
         # return 0
         while True:
             start_time = time.time()
-            # Fill pattern
-            fill_pattern(ser)
-            get_to_statue(ser)
+            reset_game(ser, vid)
 
-            
-            _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(58, 58, 58))
-            print(f'{currently_hunting} appeared!')
+            frame = _getframe(vid)
+            while not _color_near(frame[640][1143], (58, 58, 58)):
+                _press(ser, 'A', sleep_time=0.65)
+                frame = _getframe(vid)
+            print(f'{currently_hunting} appeared!') 
             _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(58, 58, 58))
             log_frame = _getframe(vid)
             print(f'{currently_hunting} pixel gone') 
@@ -239,16 +233,6 @@ def main() -> int:
                 return 0
             
             increment_counter(delay=delay, file_prefix=currently_hunting, frame=None)
-
-            frame = _getframe(vid)
-            while not numpy.array_equal(frame[669][1152], (255, 255, 255)):
-                frame = _getframe(vid)
-                time.sleep(1)
-
-            _press(ser, 'w', sleep_time=.5)
-            _press(ser, 'A',  sleep_time= 6)
-            _press(ser, 'A',  sleep_time= 1)
-
  
             end_time = time.time()
             print(f'Total runtime: {(end_time-start_time):.3f}s')
