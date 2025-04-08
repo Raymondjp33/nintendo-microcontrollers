@@ -12,6 +12,8 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     # parser.add_argument('--serial', default=SERIAL_DEFAULT)
     parser.add_argument('--serial', default='/dev/tty.usbserial-120')
+    # parser.add_argument('--serial', default='/dev/tty.usbmodem1101')
+    
     parser.add_argument('--duration', type=float, default=.1)
     parser.add_argument('--count', type=int, default=1)
     parser.add_argument('key')
