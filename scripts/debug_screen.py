@@ -64,8 +64,9 @@ def main() -> int:
 
     if args.screenshot:
         frame = getframe()
-        cv2.imwrite("screenshot.png", frame)  # Save as PNG
+        cv2.imwrite(f"{args.screenshot}.png", frame)  # Save as PNG
         print("Screenshot saved!")
+        return 0
 
     while True:
         frame = getframe()
