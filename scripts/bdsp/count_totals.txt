@@ -10,9 +10,13 @@ cresselia - 4889
 Tapu Bulu - 54 Raids
 Tapu Koko - 52 Raids
 Zapdos - 220
-Zygarde - 
+Zygarde - 170 Checks
 Virizion - 2331
 Cobalion - 1535
 Terrakion - 1213
 Raikou - 1940
-Suicune - 
+Suicune - 11030
+Entei - 522
+Latias - 
+Kyurem - 152
+Reshiram - 
