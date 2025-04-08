@@ -5,6 +5,7 @@ import contextlib
 from pathlib import Path
 import random
 import time
+import json
 from collections.abc import Generator
 from typing import NamedTuple
 import tesserocr
@@ -15,6 +16,13 @@ import numpy as np
 import cv2
 import numpy
 import serial
+import pytesseract
+import os
+
+os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/Cellar/tesseract/5.5.0/share/tessdata'
+pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.0/bin/tesseract'
+pokemon_data_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/pokemon_data.json'
+
 
 class Color(NamedTuple):
     b: int
@@ -168,7 +176,7 @@ def match_text(
     return match_text_impl
 
 def increment_counter(file_prefix, frames=None, caught_legend=False):
-    total_dens_counter_path = Path(f'total-dens-counter.txt')
+    total_dens_counter_path = Path(f'{file_prefix}-total-dens-counter.txt')
     counter_path = Path(f'{file_prefix}-counter.txt')
     # log_path = Path(f"{file_prefix}-log.txt")
     
@@ -235,19 +243,11 @@ def go_to_change_grip(ser: serial.Serial):
     _press(ser, 'A')
     
 def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
-    _press(ser, 'H')
-    time.sleep(1)
-    _press(ser, 'X')
-    time.sleep(1)
-    _press(ser, 'A')
+    _press(ser, 'H', sleep_time=1)
+    _press(ser, 'X', sleep_time=1)
+    _press(ser, 'A', sleep_time=1, count=3)
 
-    frame = _getframe(vid)
-    while not _color_near(frame[50][90], (250, 250, 250)):
-        _press(ser, 'A')
-        _wait_and_render(vid, .15)
-        frame = _getframe(vid)
-
-    print('game loaded!')
+    print('game reset!')
 
 # E for effectivness and P for PP
 class Move(NamedTuple):
@@ -255,10 +255,11 @@ class Move(NamedTuple):
     p: int
     index: int
 
-fight_index = 0
+move_index = 0
 dynamax_turns = None
+battle_index = 0
 def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial):
-    global fight_index
+    global move_index
     global dynamax_turns
     move1ETL = Point(y=471, x=919)
     move1EBR = Point(y=493, x=1050)
@@ -328,12 +329,12 @@ def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial):
 
     if (dynamax_turns is not None and dynamax_turns < 0):
         dynamax_turns = None
-        fight_index = 0
+        move_index = 0
 
     print(f'move1: {move1E} {move1P}\nmove2: {move2E} {move2P}\nmove3: {move3E} {move3P}\nmove4: {move4E} {move4P}')
     new_move_index = sorted_data[0].index
-    print(f'About to use move: {new_move_index}\nCurrently at move {fight_index}')
-    distance = fight_index - new_move_index
+    print(f'About to use move: {new_move_index}\nCurrently at move {move_index}')
+    distance = move_index - new_move_index
 
     _press(ser, 's' if distance < 0 else 'w', count=abs(distance), sleep_time=0.2)
     _press(ser, 'A', sleep_time=1)
@@ -342,14 +343,21 @@ def attack_with_move(vid: cv2.VideoCapture, ser: serial.Serial):
     # Attempt using move on self if using it in general failed
     _press(ser, 's', sleep_time=0.5)
     _press(ser, 'A', sleep_time=0.5)
-    fight_index = new_move_index
-
+    move_index = new_move_index
 
 def dynamax_if_available(vid: cv2.VideoCapture, ser: serial.Serial):
     global dynamax_turns
     frame = _getframe(vid)
+
+    dynamax_available = False
+
+    for _ in range(10):
+        if (_color_near(frame[590][728], (79, 0, 222))):
+            dynamax_available = True
+        time.sleep(0.1)
+        frame = _getframe(vid)
     # print(f'Here! {frame[590][728]}')
-    if (_color_near(frame[590][728], (79, 0, 222))):
+    if (dynamax_available):
         print('Dynamaxing!')
         dynamax_turns = 3
         _press(ser, 'a', sleep_time=0.5)
@@ -385,7 +393,7 @@ def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial, end_run = F
     print(f'Legendary: {contains_legendary}')
     print(f'We have processed all pokemon: {name_map}')
     _press(ser, 'B', sleep_time=4)
-    increment_counter('Zapdos', frames=log_frames, caught_legend=contains_legendary)
+    increment_counter('Reshiram', frames=log_frames, caught_legend=contains_legendary)
     last_key, last_value = next(reversed(name_map.items()))
     if (contains_legendary and last_value[1]):
         print(f'Shiny legendary at index: {last_key}')
@@ -508,6 +516,15 @@ def get_screen(vid: cv2.VideoCapture):
     
     if (get_text(frame=frame, top_left=Point(y=590, x=565), bottom_right=Point(y=642, x=689), invert=True) == 'letdown'):
         return 'Let down'
+    
+    if (get_text(frame=frame, top_left=Point(y=587, x=356), bottom_right=Point(y=626, x=493), invert=True) == 'Which path'):
+        return 'Pathing'
+    
+    if (get_text(frame=frame, top_left=Point(y=51, x=344), bottom_right=Point(y=105, x=454), invert=True) == 'hold one'):
+        return 'Items'
+    
+    if (get_text(frame=frame, top_left=Point(y=51, x=344), bottom_right=Point(y=105, x=454), invert=True) == 'hold one'):
+        return 'Items'
 
 def check_if_shiny(vid: cv2.VideoCapture):
     frame = _getframe(vid)
@@ -523,7 +540,25 @@ def check_if_shiny(vid: cv2.VideoCapture):
     
     return False
 
-def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial):
+def handle_select_item(vid: cv2.VideoCapture, ser: serial.Serial):
+    print('Selecting item')
+    _press(ser, 'A')
+    # extract_text(vid, 702, 66, 1261, 433)
+
+def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial, keep_dungeon = False):
+    global move_index
+    global selected
+    global dynamax_turns
+    global battle_index
+    
+    move_index = 0
+    battle_index = 0
+    selected = False
+    dynamax_turns = None
+
+    if (keep_dungeon):
+        reset_game(ser, vid)
+
     frame = _getframe(vid)
     curr_text = get_text(frame=frame, top_left=Point(y=641, x=269), bottom_right=Point(y=690, x=593), invert=True)
     while curr_text != 'Dynamax Adventure?':
@@ -534,13 +569,126 @@ def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial):
 
     # Would you like to embark on a Dynamax Adventure?
     _press(ser, 'A', sleep_time=2, count=4)
-    _press(ser, 's', sleep_time=0.5, count=2)
+    # _press(ser, 's', sleep_time=0.5, count=2)
     _press(ser, 'A', sleep_time=2, count=3)
     time.sleep(4)
 
     # Dont invite others
     _press(ser, 's', sleep_time=0.5)
     _press(ser, 'A')
+
+pathX1 = 174
+pathY1 = 62
+pathX2 = 1278
+pathY2 = 567
+
+def extract_text(vid: cv2.VideoCapture, x1, y1, x2, y2, sortByX: bool):
+    image = _getframe(vid)
+    hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+    lower_white = np.array([0, 0, 200], dtype=np.uint8)
+    upper_white = np.array([180, 50, 255], dtype=np.uint8)
+    mask = cv2.inRange(hsv, lower_white, upper_white)
+    
+    custom_config = r'--oem 3 --psm 11'
+    boxes = pytesseract.image_to_data(mask, config=custom_config, output_type=pytesseract.Output.DICT)
+    
+    text_data = []
+    for i in range(len(boxes['text'])):
+        text = boxes['text'][i].strip()
+        if len(text) > 1:  # Ignore very short words (likely noise)
+            x, y, w, h = (boxes['left'][i], boxes['top'][i], boxes['width'][i], boxes['height'][i])
+            if x1 is None or y1 is None or x2 is None or y2 is None or (x1 <= x <= x2 and y1 <= y <= y2):
+                text_data.append((x if sortByX else y, text.lower()))
+    
+    text_data.sort()
+    sorted_text = [text for _, text in text_data]
+
+    with open(pokemon_data_path, 'r') as file:
+        data = json.load(file)
+    
+    sorted_text = [text for text in sorted_text if text in data['pokemon_types']]
+
+    return sorted_text
+
+def find_white_arrow(vid: cv2.VideoCapture):
+    image = _getframe(vid)
+    cropped_image = image[pathY1:pathY2, pathX1:pathX2]
+    hsv = cv2.cvtColor(cropped_image, cv2.COLOR_BGR2HSV)
+
+    lower_white = np.array([0, 0, 200], dtype=np.uint8)
+    upper_white = np.array([180, 50, 255], dtype=np.uint8)
+    mask = cv2.inRange(hsv, lower_white, upper_white)
+
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+    if contours:
+        largest_contour = max(contours, key=cv2.contourArea)
+        x, _, _, _ = cv2.boundingRect(largest_contour)
+        return x+pathX1
+
+    return None 
+
+def handle_pathing(vid: cv2.VideoCapture, ser: serial.Serial):
+    print('Pathing')
+    types = extract_text(vid, pathX1, pathY1, pathX2, pathY2, sortByX=True)
+
+    first_path = types.__len__() == 2
+
+    arrow_positions = []
+    new_pos = find_white_arrow(vid)
+
+    while not any(new_pos < pos + 50 and new_pos > pos - 50 for pos in arrow_positions):
+        print(f'Adding arrow position: {new_pos}')
+        arrow_positions.append(new_pos)
+        _press(ser, 'd', sleep_time=0.75)
+        new_pos = find_white_arrow(vid)
+
+    print(f'Arrow positions currently: {arrow_positions}')
+
+    if arrow_positions[0] < 350 or first_path:
+        type_index = 0
+    elif arrow_positions.__len__() == 3:
+        type_index = 1
+    else:
+        type_index = 2
+    
+    print(f'Arrow is currently on pokemon: {type_index}')
+
+    types = types[type_index:(type_index + min(arrow_positions.__len__(), types.__len__() ))]
+
+    print(f'Current path types available: {types}')
+    best_index = choose_best_index(types)
+    print(f'Taking path at index {best_index}')
+    _press(ser, 'd', count=best_index, sleep_time=0.3)
+    _press(ser, 'A')
+
+def choose_best_index(values):
+    first_priority = []
+    second_priority = []
+    third_priority = []
+
+    with open(pokemon_data_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+
+    seek = data['seekTypes']
+    avoid = data['avoidTypes']
+
+    for i, value in enumerate(values):
+        if value in seek:
+            first_priority.append((i, value))  
+        elif value not in avoid:
+            second_priority.append((i, value))
+        else:
+            third_priority.append((i, value))
+
+    if first_priority:
+        return first_priority[0][0] 
+    elif second_priority:
+        return second_priority[0][0]  
+    elif third_priority:
+        return third_priority[0][0]  
+
+    return None  
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -553,9 +701,10 @@ def main() -> int:
     vid.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
     shiny_legend = False
-    global fight_index
+    global move_index
     global selected
     global dynamax_turns
+    global battle_index
 
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
         time.sleep(1)
@@ -579,23 +728,21 @@ def main() -> int:
                 swap_if_needed(vid, ser)
 
             if (screen == 'Catching'):
-                fight_index = 0
+                move_index = 0
                 dynamax_turns = None
+                battle_index += 1
                 handle_catch(ser)
 
             if (screen == 'Selecting'):
                 select_starter(vid, ser)
 
             if (screen == 'Choosing'):
-                fight_index = 0
-                selected = False
-                dynamax_turns = None
                 shiny_legend = handle_choose_pokemon(vid, ser, end_run=False)
 
                 if (shiny_legend):
                     break
 
-                restart_dungeon(vid, ser)
+                restart_dungeon(vid, ser, keep_dungeon=False)
                 # return 0
 
             if (screen == 'Cheer On'):
@@ -606,7 +753,13 @@ def main() -> int:
 
             if (screen == 'Let down'):
                 print('Handling let down')
-                restart_dungeon(vid, ser)
+                restart_dungeon(vid, ser, keep_dungeon=False)
+
+            if (screen == 'Pathing'):
+                handle_pathing(vid, ser)
+
+            if (screen == 'Items'):
+                handle_select_item(vid, ser)
 
             time.sleep(5)
 
