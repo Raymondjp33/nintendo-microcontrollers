@@ -14,7 +14,7 @@ class ConfigHandler(FileSystemEventHandler):
 
 class ConfigManager:
     def __init__(self):
-        self.file_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/dynamax_adventures/pokemon_data.json'
+        self.file_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/dynamax_adventures/den_config.json'
         self._lock = threading.Lock()
         self._data = self._load()
 
