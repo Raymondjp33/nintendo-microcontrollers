@@ -418,7 +418,7 @@ def handle_choose_pokemon(vid: cv2.VideoCapture, ser: serial.Serial, end_run = F
 def take_pokemon(ser: serial.Serial):
     _press(ser, 'A', sleep_time=1.5, count=5)
     time.sleep(2)
-    _press(ser, 'A', sleep_time=7)
+    _press(ser, 'A', sleep_time=1)
 
 def swap_if_needed(vid: cv2.VideoCapture, ser: serial.Serial):
     print('Swapping')
@@ -489,9 +489,14 @@ def handle_fight(vid: cv2.VideoCapture, ser: serial.Serial):
     dynamax_if_available(vid, ser)
     attack_with_move(vid, ser)
     
-def handle_catch(ser: serial.Serial):
+def handle_catch(ser: serial.Serial, is_legend:bool):
     print('Catching')
-    _press(ser, 'A', sleep_time=1, count=2)
+    _press(ser, 'A', sleep_time=1)
+
+    if is_legend:
+        _press(ser, 'a', sleep_time=0.5, count=3)
+
+    _press(ser, 'A', sleep_time=1)
 
 def get_screen(vid: cv2.VideoCapture):
     frame = _getframe(vid)
@@ -569,7 +574,7 @@ def restart_dungeon(vid: cv2.VideoCapture, ser: serial.Serial, keep_dungeon = Fa
 
     # Would you like to embark on a Dynamax Adventure?
     _press(ser, 'A', sleep_time=2, count=4)
-    # _press(ser, 's', sleep_time=0.5, count=2)
+    _press(ser, 's', sleep_time=0.5, count=1)
     _press(ser, 'A', sleep_time=2, count=3)
     time.sleep(4)
 
@@ -731,7 +736,7 @@ def main() -> int:
                 move_index = 0
                 dynamax_turns = None
                 battle_index += 1
-                handle_catch(ser)
+                handle_catch(ser, is_legend=battle_index==4)
 
             if (screen == 'Selecting'):
                 select_starter(vid, ser)
@@ -742,7 +747,7 @@ def main() -> int:
                 if (shiny_legend):
                     break
 
-                restart_dungeon(vid, ser, keep_dungeon=False)
+                restart_dungeon(vid, ser, keep_dungeon=True)
                 # return 0
 
             if (screen == 'Cheer On'):
