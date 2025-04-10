@@ -157,7 +157,7 @@ def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
 
 def main() -> int:
     parser = argparse.ArgumentParser()
-    parser.add_argument('--serial', default='/dev/tty.usbserial-BG009FDF')
+    parser.add_argument('--serial', default='/dev/tty.usbmodem1101')
     args = parser.parse_args()
 
     vid = cv2.VideoCapture(1)
@@ -167,7 +167,7 @@ def main() -> int:
 
     # currently_hunting = 'Azelf'
     # currently_hunting = 'Uxie'
-    currently_hunting = 'Suicune'
+    currently_hunting = 'Latias'
 
     x_val = 960
     y_val = 660
