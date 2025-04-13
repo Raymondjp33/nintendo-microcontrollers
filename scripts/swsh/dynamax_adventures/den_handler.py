@@ -13,9 +13,9 @@ os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/Cellar/tesseract/5.5.0/share/tess
 pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.0/bin/tesseract'
 pokemon_data_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/pokemon_data.json'
 
+currently_hunting = 'Solgaleo'
 
 class DenHandler:
-
     def __init__(self, vid: cv2.VideoCapture, ser: serial.Serial, config: ConfigManager):
         self.vid = vid
         self.ser = ser
@@ -26,7 +26,7 @@ class DenHandler:
         _press(self.ser, 'A', sleep_time=1)
 
         if is_legend:
-            _press(self.ser, 'a', sleep_time=0.5, count=3)
+            _press(self.ser, 'a', sleep_time=0.5, count=1)
 
         _press(self.ser, 'A', sleep_time=1)
 
@@ -90,7 +90,7 @@ class DenHandler:
         print(f'Legendary: {contains_legendary}')
         print(f'We have processed all pokemon: {name_map}')
         _press(self.ser, 'B', sleep_time=4)
-        increment_counter('Reshiram', frames=log_frames, caught_legend=contains_legendary)
+        increment_counter(currently_hunting, frames=log_frames, caught_legend=contains_legendary)
         last_key, last_value = next(reversed(name_map.items()))
         if (contains_legendary and last_value[1]):
             print(f'Shiny legendary at index: {last_key}')
@@ -111,7 +111,7 @@ class DenHandler:
             
         print(f'Take according pokemon {first_true_key}')
         _press(self.ser, 's', count=first_true_key)
-        self.take_pokemon(self.ser)
+        self.take_pokemon()
         return False
     
     def handle_den_search(self, contains_shiny: bool, beat_legend:bool):
@@ -130,15 +130,17 @@ class DenHandler:
 
         keep_dungeon = False
 
-        if (streak_data['wins'] > 0 and streak_data['battles'] < 3 or streak_percent >= 0.8):
+        if (streak_data['wins'] > 0 and streak_data['battles'] < 2 or streak_percent >= 2/3):
             keep_dungeon = True
 
-        if (contains_shiny and streak_data['battles'] < 5 and streak_percent != 1):
+        if (contains_shiny and streak_data['battles'] < 4 and streak_percent != 1):
             keep_dungeon = False
 
         if (keep_dungeon == False):
             streak_data['battles'] = 0
-            streak_data['wins'] = 0
+            streak_data['wins'] = 0 
+            streak_data['paths'] = []
+            streak_data['swaps'] = []
 
         self.config.update({"streak_data":streak_data, "keep_dungeon":keep_dungeon})
     
@@ -151,14 +153,26 @@ class DenHandler:
         _press(self.ser, '+', sleep_time=1.5)
         frame = _getframe(self.vid)
 
+        streak_data = self.config.get('streak_data')
+        if (len(streak_data['swaps']) == 3):
+            would_swap = streak_data['swaps'][self.config.get('battle_index') - 1]
+            print(f'Swapping based on streak: {would_swap}')
+            if (would_swap):
+                print(f'Swaping')
+                _press(self.ser, 'A')
+            else:
+                print('Keeping current')
+                _press(self.ser, 'B')
+            return
+
         try: curr_attack = int(get_text(frame=frame, top_left=Point(y=211, x=969), bottom_right=Point(y=247, x=1056), invert=True))
         except: curr_attack = 0
         try: curr_specattack = int(get_text(frame=frame, top_left=Point(y=178, x=1192), bottom_right=Point(y=210, x=1249), invert=True))
         except: curr_specattack = 0
 
-        try: temp_attack = int(get_text(frame=frame, top_left=Point(y=401, x=971), bottom_right=Point(y=432, x=1049), invert=True))
+        try: temp_attack = int(get_text(frame=frame, top_left=Point(y=398, x=971), bottom_right=Point(y=435, x=1049), invert=True))
         except: temp_attack = 0
-        try: temp_specattack = int(get_text(frame=frame, top_left=Point(y=362, x=1195), bottom_right=Point(y=394, x=1249), invert=True))
+        try: temp_specattack = int(get_text(frame=frame, top_left=Point(y=359, x=1192), bottom_right=Point(y=399, x=1253), invert=True))
         except: temp_specattack = 0
 
         curr_max = max(curr_attack, curr_specattack)
@@ -172,6 +186,9 @@ class DenHandler:
         else:
             print('Keeping current')
             _press(self.ser, 'B')
+
+        streak_data['swaps'].append(would_swap)
+        self.config.update({"streak_data":streak_data})
 
     def extract_text(self, x1, y1, x2, y2, sortByX: bool):
         image = _getframe(self.vid)
@@ -233,36 +250,28 @@ class DenHandler:
         return None 
     
     def choose_best_index(self, values):
-        first_priority = []
-        second_priority = []
-        third_priority = []
+        type_order = self.config.get('type_order')
 
-        with open(pokemon_data_path, "r", encoding="utf-8") as file:
-            data = json.load(file)
+        first_match = min(values, key=lambda x: type_order.index(x))
 
-        seek = data['seekTypes']
-        avoid = data['avoidTypes']
+        # Get its index in the `others` list
+        index_of_path = values.index(first_match)
 
-        for i, value in enumerate(values):
-            if value in seek:
-                first_priority.append((i, value))  
-            elif value not in avoid:
-                second_priority.append((i, value))
-            else:
-                third_priority.append((i, value))
-
-        if first_priority:
-            return first_priority[0][0] 
-        elif second_priority:
-            return second_priority[0][0]  
-        elif third_priority:
-            return third_priority[0][0]  
-
-        return None  
+        return index_of_path 
     
     def handle_pathing(self):
         print('Pathing')
         types = self.extract_text(self.pathX1, self.pathY1, self.pathX2, self.pathY2, sortByX=True)
+        
+        # If we are on a streak make sure to take same path
+        streak_data = self.config.get('streak_data')
+        if (len(streak_data['paths']) == 3):
+            index = streak_data['paths'][self.config.get('battle_index')]
+            print(f'Taking path based on streak: {index}')
+            _press(self.ser, 'd', count=index, sleep_time=0.3)
+            _press(self.ser, 'A')
+            return
+
 
         first_path = types.__len__() == 2
 
@@ -290,6 +299,8 @@ class DenHandler:
 
         print(f'Current path types available: {types}')
         best_index = self.choose_best_index(types)
+        streak_data['paths'].append(best_index)
+        self.config.update({"streak_data":streak_data})
         print(f'Taking path at index {best_index}')
         _press(self.ser, 'd', count=best_index, sleep_time=0.3)
         _press(self.ser, 'A')
@@ -309,7 +320,7 @@ class DenHandler:
 
         # Would you like to embark on a Dynamax Adventure?
         _press(self.ser, 'A', sleep_time=2, count=4)
-        _press(self.ser, 's', sleep_time=0.5, count=1)
+        # _press(self.ser, 's', sleep_time=0.5, count=1)
         _press(self.ser, 'A', sleep_time=2, count=3)
         time.sleep(4)
 
