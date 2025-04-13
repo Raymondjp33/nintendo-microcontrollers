@@ -19,7 +19,7 @@ SHOW = not os.environ.get('NOSHOW')
 
 
 def make_vid() -> cv2.VideoCapture:
-    vid = cv2.VideoCapture(1)
+    vid = cv2.VideoCapture(2)
     vid.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
     vid.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     vid.set(cv2.CAP_PROP_BUFFERSIZE, 1)  # default: 3
