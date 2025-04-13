@@ -1,0 +1,34 @@
+{
+  "dynamax_turns": 1,
+  "move_index": 2,
+  "battle_index": 3,
+  "selected_starter": true,
+  "end_run": false,
+  "keep_dungeon": true,
+  "search_dens": true,
+  "type_order": [
+    "steel",
+    "poison",
+    "fire",
+    "grass",
+    "flying",
+    "psychic",
+    "electric",
+    "fairy",
+    "normal",
+    "ghost",
+    "ice",
+    "bug",
+    "water",
+    "rock",
+    "ground",
+    "dark",
+    "fighting",
+    "dragon"
+  ],
+  "streak_data": {
+    "wins": 5,
+    "battles": 6,
+    "paths": []
+  }
+}
