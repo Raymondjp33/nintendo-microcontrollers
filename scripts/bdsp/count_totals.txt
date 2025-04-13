@@ -1,3 +1,4 @@
+        BDSP
 turtwig - 6440 (May have missed around 2000)
 dialga - 1478
 mesprit - 2042
@@ -7,16 +8,23 @@ registeel - 2834
 regice - 7602
 regirock - 2246
 cresselia - 4889
-Tapu Bulu - 54 Raids
-Tapu Koko - 52 Raids
-Zapdos - 220
-Zygarde - 170 Checks
-Virizion - 2331
-Cobalion - 1535
-Terrakion - 1213
 Raikou - 1940
 Suicune - 11030
 Entei - 522
 Latias - 
+
+        SWSH Raids
+Tapu Bulu - 54 Raids
+Tapu Koko - 52 Raids
+Zapdos - 220
+Zygarde - 170 Checks
 Kyurem - 152
-Reshiram - 
+Reshiram - 55
+Xerneas - 51
+Solgaleo - 
+
+        SWSH Normal encounters
+Virizion - 2331
+Cobalion - 1535
+Terrakion - 1213
+Regidrago - 
