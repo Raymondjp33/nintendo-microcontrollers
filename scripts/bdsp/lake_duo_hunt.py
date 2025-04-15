@@ -167,7 +167,7 @@ def main() -> int:
 
     # currently_hunting = 'Azelf'
     # currently_hunting = 'Uxie'
-    currently_hunting = 'Latias'
+    currently_hunting = 'Latios'
 
     x_val = 960
     y_val = 660
