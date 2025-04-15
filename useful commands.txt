@@ -6,3 +6,6 @@ https://github.com/adamsb0303/Shiny_Hunt_Tracker/blob/master/Images/Sprites/3d
 
 Repo with possible solution to battles:
 https://github.com/smogon/pokemon-showdown
+
+Matching pokeballs spreadsheet:
+https://docs.google.com/spreadsheets/d/1bvIx7Q2Lxp7efHRrUh48WkuwirNlKardwSHVz_R8kA0/edit?gid=936561107#gid=936561107
