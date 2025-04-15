@@ -13,7 +13,7 @@ os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/Cellar/tesseract/5.5.0/share/tess
 pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.0/bin/tesseract'
 pokemon_data_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/pokemon_data.json'
 
-currently_hunting = 'Solgaleo'
+currently_hunting = 'Landorus'
 
 class DenHandler:
     def __init__(self, vid: cv2.VideoCapture, ser: serial.Serial, config: ConfigManager):
@@ -26,7 +26,8 @@ class DenHandler:
         _press(self.ser, 'A', sleep_time=1)
 
         if is_legend:
-            _press(self.ser, 'a', sleep_time=0.5, count=1)
+            ball_index = self.config.get('ball_index')
+            _press(self.ser, 'a', sleep_time=0.5, count=ball_index)
 
         _press(self.ser, 'A', sleep_time=1)
 
@@ -92,13 +93,15 @@ class DenHandler:
         _press(self.ser, 'B', sleep_time=4)
         increment_counter(currently_hunting, frames=log_frames, caught_legend=contains_legendary)
         last_key, last_value = next(reversed(name_map.items()))
+        first_true_key = next((key for key, (_, flag) in name_map.items() if flag), None)
+        self.handle_den_search(contains_shiny = first_true_key is not None, beat_legend=contains_legendary)
+        self.config.update({'move_index': 0, 'battle_index': 0,'dynamax_turns': None, 'selected_starter': False})
         if (contains_legendary and last_value[1]):
             print(f'Shiny legendary at index: {last_key}')
+            self.clear_streak_data()
             return True
         
-        first_true_key = next((key for key, (_, flag) in name_map.items() if flag), None)
 
-        self.handle_den_search(contains_shiny = first_true_key is not None, beat_legend=contains_legendary)
 
         if (self.config.get('end_run')):
             return True
@@ -115,10 +118,12 @@ class DenHandler:
         return False
     
     def handle_den_search(self, contains_shiny: bool, beat_legend:bool):
-        if (self.config.get('search_dens') == False):
-            return
-        
         streak_data = self.config.get('streak_data')
+        if (streak_data['search_dens'] == False):
+            streak_data['paths'] = []
+            streak_data['swaps'] = []
+            self.config.update({"streak_data":streak_data,})
+            return
         
         print('Handling den search')
         if (beat_legend):
@@ -130,20 +135,28 @@ class DenHandler:
 
         keep_dungeon = False
 
-        if (streak_data['wins'] > 0 and streak_data['battles'] < 2 or streak_percent >= 2/3):
+        if (streak_data['wins'] > 0 and streak_data['battles'] < 2 or streak_percent >= .75):
             keep_dungeon = True
 
         if (contains_shiny and streak_data['battles'] < 4 and streak_percent != 1):
             keep_dungeon = False
 
         if (keep_dungeon == False):
-            streak_data['battles'] = 0
-            streak_data['wins'] = 0 
-            streak_data['paths'] = []
-            streak_data['swaps'] = []
+            self.clear_streak_data()
+            return
 
         self.config.update({"streak_data":streak_data, "keep_dungeon":keep_dungeon})
-    
+
+    def clear_streak_data(self):
+        print("Clearing streak data")
+        streak_data = self.config.get('streak_data')
+        streak_data['battles'] = 0
+        streak_data['wins'] = 0 
+        streak_data['paths'] = []
+        streak_data['swaps'] = []
+
+        self.config.update({"streak_data":streak_data, "keep_dungeon": False})
+
     def take_pokemon(self):
         _press(self.ser, 'A', sleep_time=3.5, count=5)
         _press(self.ser, 'A', sleep_time=1)
@@ -154,7 +167,7 @@ class DenHandler:
         frame = _getframe(self.vid)
 
         streak_data = self.config.get('streak_data')
-        if (len(streak_data['swaps']) == 3):
+        if (len(streak_data['swaps']) == 3 and streak_data['search_dens'] == True):
             would_swap = streak_data['swaps'][self.config.get('battle_index') - 1]
             print(f'Swapping based on streak: {would_swap}')
             if (would_swap):
@@ -265,7 +278,7 @@ class DenHandler:
         
         # If we are on a streak make sure to take same path
         streak_data = self.config.get('streak_data')
-        if (len(streak_data['paths']) == 3):
+        if (len(streak_data['paths']) == 3 and streak_data['search_dens'] == True):
             index = streak_data['paths'][self.config.get('battle_index')]
             print(f'Taking path based on streak: {index}')
             _press(self.ser, 'd', count=index, sleep_time=0.3)
@@ -306,7 +319,6 @@ class DenHandler:
         _press(self.ser, 'A')
 
     def restart_dungeon(self, keep_dungeon = False):
-        self.config.update({'move_index': 0, 'battle_index': 0,'dynamax_turns': None, 'selected_starter': False})
         if (keep_dungeon):
             self.reset_game()
 
@@ -317,10 +329,11 @@ class DenHandler:
             time.sleep(2)
             frame = _getframe(self.vid)
             curr_text = get_text(frame=frame, top_left=Point(y=641, x=269), bottom_right=Point(y=690, x=593), invert=True)
-
+        
+        pokemon_den_index = self.config.get('pokemon_den_index')
         # Would you like to embark on a Dynamax Adventure?
         _press(self.ser, 'A', sleep_time=2, count=4)
-        # _press(self.ser, 's', sleep_time=0.5, count=1)
+        _press(self.ser, 's', sleep_time=0.5, count=pokemon_den_index)
         _press(self.ser, 'A', sleep_time=2, count=3)
         time.sleep(4)
 
