@@ -11,7 +11,8 @@ cresselia - 4889
 Raikou - 1940
 Suicune - 11030
 Entei - 522
-Latias - 
+Latias - 10909
+Latios - 
 
         SWSH Raids
 Tapu Bulu - 54 Raids
@@ -21,10 +22,12 @@ Zygarde - 170 Checks
 Kyurem - 152
 Reshiram - 55
 Xerneas - 51
-Solgaleo - 
+Solgaleo - 52
+Moltres - 25
+Landorus - 
 
         SWSH Normal encounters
 Virizion - 2331
 Cobalion - 1535
 Terrakion - 1213
-Regidrago - 
+Regidrago - 5626 (Full odds)
