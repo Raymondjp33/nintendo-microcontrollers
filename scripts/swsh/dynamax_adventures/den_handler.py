@@ -99,6 +99,7 @@ class DenHandler:
         if (contains_legendary and last_value[1]):
             print(f'Shiny legendary at index: {last_key}')
             self.clear_streak_data()
+            _press(self.ser, 's', count=3, sleep_time=0.5)
             return True
         
 
