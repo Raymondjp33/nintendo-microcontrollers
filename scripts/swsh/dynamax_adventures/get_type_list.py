@@ -49,8 +49,8 @@ def rank_types(defense_types, offense_types, type_chart):
 
 # Example usage
 if __name__ == "__main__":
-    defense = ["flying", "dark", "dragon"]
-    offense = ["flying", "dark"]
+    defense = ["ground", "fighting", "rock"]
+    offense = ["ground", "flying"]
 
     ranked = rank_types(defense, offense, type_chart)
     for t, d_score, o_score in ranked:
