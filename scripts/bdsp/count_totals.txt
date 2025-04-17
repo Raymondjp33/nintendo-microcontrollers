@@ -12,7 +12,8 @@ Raikou - 1940
 Suicune - 11030
 Entei - 522
 Latias - 10909
-Latios - 
+Latios - 6066
+Mewtwo - 
 
         SWSH Raids
 Tapu Bulu - 54 Raids
@@ -24,7 +25,9 @@ Reshiram - 55
 Xerneas - 51
 Solgaleo - 52
 Moltres - 25
-Landorus - 
+Landorus - 92
+Thundurus - 38
+Yveltal - 
 
         SWSH Normal encounters
 Virizion - 2331
