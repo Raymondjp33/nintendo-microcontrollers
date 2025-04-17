@@ -13,7 +13,7 @@ os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/Cellar/tesseract/5.5.0/share/tess
 pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.0/bin/tesseract'
 pokemon_data_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/pokemon_data.json'
 
-currently_hunting = 'Landorus'
+currently_hunting = 'Yveltal'
 
 class DenHandler:
     def __init__(self, vid: cv2.VideoCapture, ser: serial.Serial, config: ConfigManager):
@@ -136,7 +136,7 @@ class DenHandler:
 
         keep_dungeon = False
 
-        if (streak_data['wins'] > 0 and streak_data['battles'] < 2 or streak_percent >= .75):
+        if (streak_data['wins'] > 0 and streak_data['battles'] < 2 or streak_percent >= streak_data['win_ratio_threshold']):
             keep_dungeon = True
 
         if (contains_shiny and streak_data['battles'] < 4 and streak_percent != 1):
@@ -265,6 +265,9 @@ class DenHandler:
     
     def choose_best_index(self, values):
         type_order = self.config.get('type_order')
+
+        if (len(values) == 0):
+            return 0
 
         first_match = min(values, key=lambda x: type_order.index(x))
 
