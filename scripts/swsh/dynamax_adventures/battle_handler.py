@@ -104,12 +104,15 @@ class BattleHandler:
         distance = move_index - new_move_index
 
         _press(self.ser, 's' if distance < 0 else 'w', count=abs(distance), sleep_time=0.2)
-        _press(self.ser, 'A', sleep_time=1.3)
-        _press(self.ser, 'A', sleep_time=0.5)
+        _press(self.ser, 'A', sleep_time=1.5)
+        _press(self.ser, 'A', sleep_time=0.75)
         
         # Attempt using move on self if using it in general failed
         _press(self.ser, 's', sleep_time=0.5)
         _press(self.ser, 'A', sleep_time=0.5)
+
+        # Go back if all else fails
+        _press(self.ser, 'B', sleep_time=0.5, count=3)
         self.config.update({'dynamax_turns': dynamax_turns, 'move_index':new_move_index})
     
     def dynamax_if_available(self):
