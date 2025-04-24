@@ -1,0 +1,78 @@
+import 'package:flutter/material.dart';
+
+import '../constants/app_styles.dart';
+import '../widgets/spacing.dart';
+import 'line_item.dart';
+
+class LeftSwitchContent extends StatelessWidget {
+  const LeftSwitchContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'brilliant diamond',
+          style: AppTextStyles.minecraftTen(fontSize: 32),
+        ),
+        LineItem(leftText: 'Odds', rightText: '1/100'),
+        LineItem(leftText: 'Normal shinies', rightText: '60'),
+        LineItem(leftText: 'Legendary shinies', rightText: '15'),
+        LineItem(leftText: 'Total dens', rightText: '2500'),
+        LineItem(leftText: 'Average checks', rightText: '92.25'),
+        Spacer(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 150,
+              height: 108,
+              child: Image.asset(
+                'assets/images/637.gif',
+                fit: BoxFit.contain,
+              ),
+            ),
+            HorizontalSpace(10),
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '152',
+                        style: AppTextStyles.minecraft(fontSize: 48),
+                      ),
+                      Spacer(),
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Total dens',
+                            style: AppTextStyles.minecraft(fontSize: 24),
+                          ),
+                          Text(
+                            '300',
+                            style: AppTextStyles.minecraft(fontSize: 24),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '1d 2h 10m 5s',
+                    style: AppTextStyles.minecraft(fontSize: 24),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+}
