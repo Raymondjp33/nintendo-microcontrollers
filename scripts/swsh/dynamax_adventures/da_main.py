@@ -93,6 +93,9 @@ def main() -> int:
             if (screen == 'Rental'):
                 den_handler.handle_rental()
 
+            if (screen == 'Sus'):
+                den_handler.handle_sus()
+
             time.sleep(5)
 
     vid.release()

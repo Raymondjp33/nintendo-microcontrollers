@@ -13,7 +13,10 @@ Suicune - 11030
 Entei - 522
 Latias - 10909
 Latios - 6066
-Mewtwo - 
+Mewtwo - 2204
+Regigigas - 143
+Azelf - 5532
+Uxie - 
 
         SWSH Raids
 Tapu Bulu - 54 Raids
@@ -27,7 +30,10 @@ Solgaleo - 52
 Moltres - 25
 Landorus - 92
 Thundurus - 38
-Yveltal - 
+Yveltal - 280 (661 dens)
+Lunala - 5 (8 dens)
+Articuno -
+
 
         SWSH Normal encounters
 Virizion - 2331

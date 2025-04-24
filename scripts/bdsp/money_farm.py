@@ -229,6 +229,39 @@ def reset_game(ser: serial.Serial, vid: cv2.VideoCapture,):
 
     print('game loaded!')
 
+def start_battle(ser: serial.Serial, vid: cv2.VideoCapture,):
+    while True:
+        frame = _getframe(vid)
+        
+        distance_duration = 1.3
+        for _ in range(8):
+            _press(ser, 'w', duration=distance_duration)
+            _press(ser, 's', duration=distance_duration)
+
+        _press(ser, '+', sleep_time=1)
+        _press(ser, 's', sleep_time=3)
+
+        _press(ser, 'A', sleep_time=.5, count=5)
+
+        _press(ser, 'a', sleep_time=.5)
+        _press(ser, 'A', sleep_time=0.5, count=3)
+
+        for _ in range(12):
+            frame = _getframe(vid)
+            if (_color_near(frame[443][1120], (7, 7, 7))):
+                return True
+            time.sleep(0.5)
+            
+        _press(ser, 'd', sleep_time=.5)
+        _press(ser, 'A', sleep_time=0.5, count=3)
+
+        for _ in range(12):
+            frame = _getframe(vid)
+            if (_color_near(frame[443][1120], (7, 7, 7))):
+                return True
+            time.sleep(0.5)
+
+
 
 def main() -> int:
     parser = argparse.ArgumentParser()
@@ -247,83 +280,43 @@ def main() -> int:
     x_val = 960
     y_val = 660
 
+    battling = False
+
   
     with serial.Serial(args.serial, 9600) as ser, _shh(ser):
         # go_to_change_grip(ser)
         # connect_and_go_to_game(ser)
         # return 0
         while True:
-            start_time = time.time()
-            reset_game(ser=ser, vid=vid)
+            frame = _getframe(vid)
 
-            print('Interacting')
-            _press(ser, 'A', sleep_time=1.5)
-            _press(ser, 'A', sleep_time=0.5)
-            _press(ser, 'A')
-            # test_start = time.time()
+            start_battle(ser, vid)
 
-            
-            # _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # # print('First white screen')
-            # _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # # print('Gone first white screen')
+            battling = True
+            print('Starting battle')
 
-            # _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # # print('Second white screen')
-            # _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # # print('Gone Second white screen')
-            # # time.sleep(7)
-            # # test_end = time.time()
-            # _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            # return 0
-            while True:
+
+            while battling:
+                # print('in this loop')
                 frame = _getframe(vid)
-                current_text = get_text(frame=frame, top_left=Point(y=587, x=114), bottom_right=Point(y=638, x=378), invert=True)
-                # print(f'here and current text is ${current_text}')
-                if (current_text == 'Uxie appeared!'):
-                    print('Uxie appeared!')
-                    break
-                time.sleep(0.4)
-            # print(f'{currently_hunting} appeared!')
+                if (_color_near(frame[443][1120], (72, 76, 232))):
+                    print('Using move')
+                    _press(ser, 'A', sleep_time=1, count=4)
+                    
 
-            _await_not_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            log_frame = _getframe(vid)
-            print(f'{currently_hunting} pixel gone') 
-            t0 = time.time()
+                # Seeing exp points
+                if ((get_text(frame=frame, top_left=Point(y=584, x=685), bottom_right=Point(y=635, x=789), invert=True)) == 'Points!'):
+                    print('Exp points')
+                    _press(ser, 'A', sleep_time=1, count=2)
+                
+                # Battle over
+                if ((get_text(frame=frame, top_left=Point(y=634, x=299), bottom_right=Point(y=680, x=494), invert=True)) == 'buddy here...'):
+                    print('Battle over')
+                    _press(ser, 'A', sleep_time=1, count=7)
+                    battling = False
+                    
+                time.sleep(3)
 
-
-            # print(f'Test runtime: {(test_end-test_start):.3f}s')
-            # return 0
-            
-            _await_pixel(ser, vid, x=x_val, y=y_val, pixel=(255, 255, 255))
-            print('Go Breloom!')
-            t1 = time.time()
-
-            delay = t1 - t0
-            print(f'dialog delay: {delay:.3f}s')
-
-            if (delay) > 0.7:
-                print('SHINY!!!')
-                _press(ser, 'C', duration=2)
-                _press(ser, 'H', duration=1)
-                _press(ser, 's', duration=0.25)
-                _press(ser, 'd', duration=0.25)
-                _press(ser, 'd', duration=0.25)
-                _press(ser, 'd', duration=0.25)
-                _press(ser, 'd', duration=0.25)
-                _press(ser, 'd', duration=0.25)
-                _press(ser, 'd', duration=0.25)
-                _press(ser, 'A', duration=1)
-                _press(ser, 'w', duration=1)
-                _press(ser, 'A', duration=1)
-                increment_counter(frame=log_frame, delay=delay, file_prefix=currently_hunting)
-                write_shiny_text()
-                return 0
-
-            increment_counter(delay=delay, file_prefix=currently_hunting)
-            end_time = time.time()
-            print(f'Total runtime: {(end_time-start_time):.3f}s')
-            # print(f'Test runtime: {(test_end-test_start):.3f}s')
             # return 0
 
 

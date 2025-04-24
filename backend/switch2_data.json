@@ -1,0 +1,111 @@
+{
+  "normal_shinies": 0,
+  "pokemon": [
+    {
+      "pokemon": "Tapu Bulu",
+      "encounters": 54,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 80 }
+    },
+    {
+      "pokemon": "Tapu Koko",
+      "encounters": 52,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 86 }
+    },
+    {
+      "pokemon": "Zapdos",
+      "encounters": 220,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 520 }
+    },
+    {
+      "pokemon": "Zygarde",
+      "encounters": 170,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 362 }
+    },
+    {
+      "pokemon": "Kyurem",
+      "encounters": 152,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 431 }
+    },
+    {
+      "pokemon": "Reshiram",
+      "encounters": 55,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 154 }
+    },
+    {
+      "pokemon": "Xerneas",
+      "encounters": 51,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 132 }
+    },
+    {
+      "pokemon": "Solgaleo",
+      "encounters": 52,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 143 }
+    },
+    {
+      "pokemon": "Moltres",
+      "encounters": 25,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 35 }
+    },
+    {
+      "pokemon": "Landorus",
+      "encounters": 92,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 202 }
+    },
+    {
+      "pokemon": "Thundurus",
+      "encounters": 38,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 85 }
+    },
+    {
+      "pokemon": "Yveltal",
+      "encounters": 280,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 661 },
+      "caught_timestamp": 1745402400000
+    },
+    {
+      "pokemon": "Lunala",
+      "encounters": 5,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 8 },
+      "caught_timestamp": 1745402400000
+    },
+    {
+      "pokemon": "Articuno",
+      "encounters": 1123,
+      "encoutner_method": "dynamax_adventures",
+      "extra_data": { "total_dens": 8 }
+    },
+    {
+      "pokemon": "Virizion",
+      "encounters": 2331,
+      "encoutner_method": "static"
+    },
+    {
+      "pokemon": "Cobalion",
+      "encounters": 1535,
+      "encoutner_method": "static"
+    },
+    {
+      "pokemon": "Terrakion",
+      "encounters": 1213,
+      "encoutner_method": "static"
+    },
+    {
+      "pokemon": "Regidrago",
+      "encounters": 5626,
+      "encoutner_method": "static-fullodds"
+    }
+  ]
+}

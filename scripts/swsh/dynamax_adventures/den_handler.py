@@ -13,7 +13,7 @@ os.environ['TESSDATA_PREFIX'] = '/opt/homebrew/Cellar/tesseract/5.5.0/share/tess
 pytesseract.pytesseract.tesseract_cmd = r'/opt/homebrew/Cellar/tesseract/5.5.0/bin/tesseract'
 pokemon_data_path = '/Users/raymondprice/Desktop/other/test_coding/pokemon_scripts/nintendo-microcontrollers/scripts/swsh/pokemon_data.json'
 
-currently_hunting = 'Yveltal'
+currently_hunting = 'Articuno'
 
 class DenHandler:
     def __init__(self, vid: cv2.VideoCapture, ser: serial.Serial, config: ConfigManager):
@@ -239,6 +239,10 @@ class DenHandler:
     def handle_rental(self):
         print('Rental pokemon')
         _press(self.ser, 'B')
+    
+    def handle_sus(self):
+        print('Sus screen')
+        _press(self.ser, 'A', sleep_time=5, count=2)
 
     pathX1 = 174
     pathY1 = 62

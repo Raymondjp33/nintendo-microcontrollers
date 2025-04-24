@@ -1,33 +1,46 @@
 {
-  "dynamax_turns": null,
-  "move_index": 0,
-  "battle_index": 0,
-  "selected_starter": false,
-  "end_run": false,
-  "keep_dungeon": false,
-  "search_dens": true,
-  "type_order": [
-    "rock",
-    "ground",
-    "fairy",
-    "dragon",
-    "water",
-    "dark",
-    "flying",
-    "psychic",
-    "electric",
-    "normal",
-    "ghost",
-    "fire",
-    "fighting",
-    "poison",
-    "ice",
-    "bug",
-    "steel",
-    "grass"
-  ],
-  "streak_data": {
-    "wins": 0,
-    "battles": 0
-  }
+    "dynamax_turns": 2,
+    "move_index": 1,
+    "battle_index": 3,
+    "selected_starter": true,
+    "end_run": false,
+    "keep_dungeon": false,
+    "ball_index": 6,
+    "pokemon_den_index": 0,
+    "streak_data": {
+        "search_dens": false,
+        "win_ratio_threshold": 0.8,
+        "wins": 0,
+        "battles": 0,
+        "paths": [
+            0,
+            1,
+            2
+        ],
+        "swaps": [
+            false,
+            false,
+            false
+        ]
+    },
+    "type_order": [
+        "steel",
+        "rock",
+        "fire",
+        "electric",
+        "water",
+        "ice",
+        "normal",
+        "poison",
+        "psychic",
+        "ghost",
+        "dark",
+        "fairy",
+        "fighting",
+        "flying",
+        "dragon",
+        "bug",
+        "ground",
+        "grass"
+    ]
 }

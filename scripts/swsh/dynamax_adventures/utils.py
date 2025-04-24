@@ -318,3 +318,6 @@ def get_screen(vid: cv2.VideoCapture):
     
     if (get_text(frame=frame, top_left=Point(y=626, x=600), bottom_right=Point(y=667, x=674), invert=True) == 'rental'):
         return 'Rental'
+    
+    if (get_text(frame=frame, top_left=Point(y=242, x=245), bottom_right=Point(y=294, x=562), invert=True) == 'Play is being suspended.'):
+        return 'Sus'
